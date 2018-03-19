@@ -1,0 +1,9 @@
+{
+    "extends": "eslint-config-default",
+    "rules": {
+        "semi": [
+            "error",
+            "always"
+        ]
+    }
+}
