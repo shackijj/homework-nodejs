@@ -19,7 +19,7 @@ function getTree (repoPath, commitHash, treePath = '') {
         .split('\n')
         .map(line => {
           const [mode, type, hash, path] = line.split(/\s+/);
-          return { type, path, commit: hash };
+          return { type, path, commit: commitHash };
         });
 
       if (treePath) {
