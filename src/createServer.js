@@ -24,7 +24,7 @@ function createServer (config) {
   });
 
   app.get('/tree', (req, res) => {
-    getTree(config.repoPath, req.query.commit, req.query.path)
+    getTree(config.repoPath, req.query.hash, req.query.branch, req.query.path)
       .then(objects => res.render('tree', { objects }))
       .catch(error => res.render('error', { error }));
   });

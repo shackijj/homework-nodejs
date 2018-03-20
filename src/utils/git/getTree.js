@@ -3,14 +3,16 @@ const execShell = require('../execShell');
 /**
  * @see https://git-scm.com/docs/git-ls-tree
  * @param {string} repoPath
- * @param {string} commitHash
+ * @param {string} id
  * @param {string} path
+ * @param {string} branch
  * @return {Promise}
  */
-function getTree (repoPath, commitHash, treePath = '') {
+function getTree (repoPath, id, branch, treePath = '') {
+  const lsTreeOptions = id ? id : `$(cat .git/${branch}):${treePath}`;
   const cmd = `
     cd ${repoPath};
-    git ls-tree ${commitHash}:${treePath};
+    git ls-tree ${lsTreeOptions};
   `;
   return execShell(cmd)
     .then(stdout => {
@@ -19,7 +21,13 @@ function getTree (repoPath, commitHash, treePath = '') {
         .split('\n')
         .map(line => {
           const [mode, type, hash, path] = line.split(/\s+/);
-          return { type, path, commit: commitHash };
+          return {
+            type,
+            path: treePath ? `${treePath}/${path}` : path,
+            name: path,
+            hash,
+            branch
+          };
         });
 
       if (treePath) {
@@ -32,9 +40,9 @@ function getTree (repoPath, commitHash, treePath = '') {
         result.unshift({
           type: 'link-back',
           path,
-          commit: commitHash
+          branch
         });
-      }
+      };
       return result;
     });
 };
