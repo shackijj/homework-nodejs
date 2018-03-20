@@ -6,6 +6,9 @@ html
     ul(class="tree-list")
       each object in objects
         li(class="tree-list__item")
+          -if (object.type === 'link-back')
+            div(class="link-back")
+              span(class="link-back__name")=".."
           -if (object.type === 'blob')
             div(class="blob-object")
               span(class="blob-object__name")=object.name
