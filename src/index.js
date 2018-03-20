@@ -1,14 +1,6 @@
-function createServer () {
-  return {
-    start: () => {
+const config = require('../config/test.json');
+const createServer = require('./createServer');
 
-    },
-    stop: () => {
+const server = createServer(config);
 
-    }
-  };
-}
-
-module.exports = {
-  createServer
-};
+server.start();
