@@ -38,7 +38,7 @@ describe('App gets request on /tree', () => {
       .then(() => server.stop())
   );
 
-  describe('given that requested object is a tree and filename is not given', () => {
+  describe('given that requested object is a tree and "path" param is not given', () => {
     let response;
     before(() =>
       rp(`http://${config.host}:${config.port}/tree?commit=${commitHash}`)
@@ -47,34 +47,70 @@ describe('App gets request on /tree', () => {
         })
     );
     it('will show list of files and directories', () => {
+      /* eslint-disable indent */
       const expected = [
         '<!DOCTYPE html>',
-        '<html>',
-        '<head>',
-        '<title>Tree</title>',
-        '</head>',
-        '<body>',
-        '<ul class="tree-list">',
-        '<li class="tree-list__item">',
-        '<div class="tree-object">',
-        '<span class="tree-object__name">dir</span>',
-        '</div>',
-        '</li>',
-        '<li class="tree-list__item">',
-        '<div class="blob-object">',
-        '<span class="blob-object__name">file</span>',
-        '</div>',
-        '</li>',
-        '</ul>',
-        '</body>',
+          '<html>',
+          '<head>',
+          '<title>Tree</title>',
+          '</head>',
+          '<body>',
+            '<ul class="tree-list">',
+              '<li class="tree-list__item">',
+                '<div class="tree-object">',
+                '<span class="tree-object__name">dir</span>',
+                '</div>',
+              '</li>',
+              '<li class="tree-list__item">',
+                '<div class="blob-object">',
+                '<span class="blob-object__name">file</span>',
+                '</div>',
+              '</li>',
+            '</ul>',
+          '</body>',
         '</html>'
       ].join('');
+      /* eslint-enable indent */
 
       expect(response).to.equal(expected);
     });
   });
 
-/*   describe('given that requested object is a blob', () => {
-    it('will show content of the blob');
-  }); */
+  describe('given that requested object is a tree and the path param is "dir"', () => {
+    let response;
+    before(() =>
+      rp(`http://${config.host}:${config.port}/tree?commit=${commitHash}&path=dir`)
+        .then((html) => {
+          response = html;
+        })
+    );
+    it('will show list of files amd directories inside dir folder and link to come upper in the tree', () => {
+      /* eslint-disable indent */
+      const expected = [
+        '<!DOCTYPE html>',
+          '<html>',
+          '<head>',
+          '<title>Tree</title>',
+          '</head>',
+          '<body>',
+            '<ul class="tree-list">',
+              '<li class="tree-list__item">',
+                '<div class="link-back">',
+                  '<span class="link-back__name">..</span>',
+                '</div>',
+              '</li>',
+              '<li class="tree-list__item">',
+                '<div class="blob-object">',
+                '<span class="blob-object__name">file-in-dir</span>',
+                '</div>',
+              '</li>',
+            '</ul>',
+          '</body>',
+        '</html>'
+      ].join('');
+      /* eslint-enable indent */
+
+      expect(response).to.equal(expected);
+    });
+  });
 });
