@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-const execShell = require('./utils/execShell');
+const getBranches = require('./utils/git/getBranches');
 
 function createServer (config) {
   const app = express();
@@ -10,13 +10,9 @@ function createServer (config) {
   app.set('view engine', 'pug');
 
   app.get('/', (req, res) => {
-    execShell(`
-        cd ${config.repoPath};
-        git for-each-ref --format='%(refname:short)' refs/heads/;`)
-      .then((stdout) => {
-        const branches = stdout.trim().split('\n');
-        res.render('branches', { branches });
-      });
+    getBranches(config.repoPath)
+      .then(branches => res.render('branches', { branches }))
+      .catch(error => res.render('error', { error }));
   });
 
   return {
