@@ -7,10 +7,10 @@ const execShell = require('../execShell');
  * @param {string} path
  * @return {Promise}
  */
-function getTree (repoPath, commitHash, path = '') {
+function getTree (repoPath, commitHash, treePath = '') {
   const cmd = `
     cd ${repoPath};
-    git ls-tree ${commitHash}:${path};
+    git ls-tree ${commitHash}:${treePath};
   `;
   return execShell(cmd)
     .then(stdout => {
@@ -18,12 +18,12 @@ function getTree (repoPath, commitHash, path = '') {
         .trim()
         .split('\n')
         .map(line => {
-          const [mode, type, hash, name] = line.split(/\s+/);
-          return { type, name };
+          const [mode, type, hash, path] = line.split(/\s+/);
+          return { type, path, commit: hash };
         });
 
-      if (path) {
-        const name = path
+      if (treePath) {
+        const path = treePath
           .split('/')
           .filter(item => item !== '')
           .slice(0, -1)
@@ -31,7 +31,8 @@ function getTree (repoPath, commitHash, path = '') {
 
         result.unshift({
           type: 'link-back',
-          name
+          path,
+          commit: commitHash
         });
       }
       return result;

@@ -8,10 +8,10 @@ html
         li(class="tree-list__item")
           -if (object.type === 'link-back')
             div(class="link-back")
-              span(class="link-back__name")=".."
+              a(class="link-back__link", href='/tree?commit=' + object.commit + '&path=' + object.path)=".."
           -if (object.type === 'blob')
             div(class="blob-object")
-              span(class="blob-object__name")=object.name
+              a(class="blob-object__link", href='/blob?commit=' + object.commit + '&path=' + object.path)=object.path
           -if (object.type === 'tree')
             div(class="tree-object")
-              span(class="tree-object__name")=object.name
+              a(class="tree-object__link", href='/tree?commit=' + object.commit + '&path=' + object.path)=object.path
