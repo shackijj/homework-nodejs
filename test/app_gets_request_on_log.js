@@ -47,15 +47,20 @@ describe('App gets request on /log', () => {
         '<body>',
         '<ul class="commits-list">',
         '<li class="commits-list__item">',
-        '<div class="commit">Second commit</div>',
+        '<div class="commit">',
+        '<span class="commit__subject">Second commit</span>',
+        '</div>',
         '</li>',
         '<li class="commits-list__item">',
-        '<div class="commit">First commit</div>',
+        '<div class="commit">',
+        '<span class="commit__subject">First commit</span>',
+        '</div>',
         '</li>',
         '</ul>',
         '</body>',
         '</html>'
       ].join('');
+      expect(response).to.equal(expected);
     });
   });
 
@@ -75,13 +80,17 @@ describe('App gets request on /log', () => {
         '<title>Log</title>',
         '</head>',
         '<body>',
+        '<ul class="commits-list">',
         '<li class="commits-list__item">',
-        '<div class="commit">First commit</div>',
+        '<div class="commit">',
+        '<span class="commit__subject">First commit</span>',
+        '</div>',
         '</li>',
         '</ul>',
         '</body>',
         '</html>'
       ].join('');
+      expect(response).to.equal(expected);
     });
   });
 });

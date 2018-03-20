@@ -6,4 +6,5 @@ html
     ul(class="commits-list")
       each commit in commits
         li(class="commits-list__item")
-          div(class="commit")=commit
+          div(class="commit")
+            span(class="commit__subject")=commit
