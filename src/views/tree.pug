@@ -1,0 +1,14 @@
+doctype html
+html
+  head
+    title="Tree"
+  body
+    ul(class="tree-list")
+      each object in objects
+        li(class="tree-list__item")
+          -if (object.type === 'blob')
+            div(class="blob-object")
+              span(class="blob-object__name")=object.name
+          -if (object.type === 'tree')
+            div(class="tree-object")
+              span(class="tree-object__name")=object.name
