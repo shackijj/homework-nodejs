@@ -113,7 +113,7 @@ describe('App gets request on /tree', () => {
               '</li>',
               '<li class="tree-list__item">',
                 '<div class="blob-object">',
-                  `<a class="blob-object__link" href="/blob?hash=${fileInDirObj.hash}&amp;path=file-in-dir&amp;branch=refs/heads/test">file-in-dir</a>`,
+                  `<a class="blob-object__link" href="/blob?hash=${fileInDirObj.hash}&amp;path=dir/file-in-dir&amp;branch=refs/heads/test">file-in-dir</a>`,
                 '</div>',
               '</li>',
             '</ul>',
