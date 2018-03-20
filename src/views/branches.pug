@@ -7,5 +7,5 @@ html
       each branch in branches
         li(class="branch-list__item")
           div(class="branch")
-            div(class="branch__name")=branch
+            span(class="branch__name")=branch
             a(class="branch__log", href="/log?ref=refs/heads/" + branch)="log"
