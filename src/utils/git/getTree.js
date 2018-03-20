@@ -9,7 +9,7 @@ const execShell = require('../execShell');
  * @return {Promise}
  */
 function getTree (repoPath, id, branch, treePath = '') {
-  const lsTreeOptions = id ? id : `$(cat .git/${branch}):${treePath}`;
+  const lsTreeOptions = id ? id : `${branch}:${treePath}`;
   const cmd = `
     cd ${repoPath};
     git ls-tree ${lsTreeOptions};
