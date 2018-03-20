@@ -21,11 +21,7 @@ describe('App gets request on /log', () => {
       git add file2.js
       git commit -m "Second commit";
     `)
-      .then(() => server.start())
-      .then(() => rp(`http://${config.host}:${config.port}/log?ref=refs/heads/test2`))
-      .then((html) => {
-        response = html;
-      });
+      .then(() => server.start());
   });
 
   after(() =>
@@ -33,25 +29,59 @@ describe('App gets request on /log', () => {
       .then(() => server.stop())
   );
 
-  it('will return the list of commits', () => {
-    const expected = [
-      '<!DOCTYPE html>',
-      '<html>',
-      '<head>',
-      '<title>Log</title>',
-      '</head>',
-      '<body>',
-      '<ul class="commits-list">',
-      '<li class="commits-list__item">',
-      '<div class="commit">Second commit</div>',
-      '</li>',
-      '<li class="commits-list__item">',
-      '<div class="commit">First commit</div>',
-      '</li>',
-      '</ul>',
-      '</body>',
-      '</html>'
-    ].join('');
-    expect(response).to.eql(expected);
+  describe('given that log is requested for refs/heads/test2', () => {
+    let response;
+    before(() =>
+      rp(`http://${config.host}:${config.port}/log?ref=refs/heads/test2`)
+        .then((html) => {
+          response = html;
+        })
+    );
+    it('will return the list of commits for test2 branch ', () => {
+      const expected = [
+        '<!DOCTYPE html>',
+        '<html>',
+        '<head>',
+        '<title>Log</title>',
+        '</head>',
+        '<body>',
+        '<ul class="commits-list">',
+        '<li class="commits-list__item">',
+        '<div class="commit">Second commit</div>',
+        '</li>',
+        '<li class="commits-list__item">',
+        '<div class="commit">First commit</div>',
+        '</li>',
+        '</ul>',
+        '</body>',
+        '</html>'
+      ].join('');
+    });
+  });
+
+  describe('given that log is requested for refs/heads/test1', () => {
+    let response;
+    before(() =>
+      rp(`http://${config.host}:${config.port}/log?ref=refs/heads/test1`)
+        .then((html) => {
+          response = html;
+        })
+    );
+    it('will return the list of commits for test1 branch ', () => {
+      const expected = [
+        '<!DOCTYPE html>',
+        '<html>',
+        '<head>',
+        '<title>Log</title>',
+        '</head>',
+        '<body>',
+        '<li class="commits-list__item">',
+        '<div class="commit">First commit</div>',
+        '</li>',
+        '</ul>',
+        '</body>',
+        '</html>'
+      ].join('');
+    });
   });
 });
