@@ -1,0 +1,9 @@
+doctype html
+html
+  head
+    title="Log"
+  body
+    ul(class="commits-list")
+      each commit in commits
+        li(class="commits-list__item")
+          div(class="commit")=commit
