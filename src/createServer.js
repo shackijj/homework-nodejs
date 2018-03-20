@@ -3,6 +3,7 @@ const path = require('path');
 const getBranches = require('./utils/git/getBranches');
 const getBranchCommits = require('./utils/git/getBranchCommits');
 const getTree = require('./utils/git/getTree');
+const getBlob = require('./utils/git/getBlob');
 
 function createServer (config) {
   const app = express();
@@ -26,6 +27,12 @@ function createServer (config) {
   app.get('/tree', (req, res) => {
     getTree(config.repoPath, req.query.hash, req.query.branch, req.query.path)
       .then(objects => res.render('tree', { objects }))
+      .catch(error => res.render('error', { error }));
+  });
+
+  app.get('/blob', (req, res) => {
+    getBlob(config.repoPath, req.query.branch, req.query.path)
+      .then(blob => res.render('blob', { blob }))
       .catch(error => res.render('error', { error }));
   });
 
