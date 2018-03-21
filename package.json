@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha -t 10000 \"test/**/*.js\"",
+    "test": "mocha \"unit_tests/**/*.js\"",
+    "test:integration": "mocha -t 10000 \"integration_tests/**/*.js\"",
     "lint": "eslint .",
     "start": "nodemon"
   },
