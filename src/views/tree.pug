@@ -3,15 +3,20 @@ html
   head
     title="Tree"
   body
-    ul(class="tree-list")
-      each object in objects
-        li(class="tree-list__item")
-          -if (object.type === 'link-back')
-            div(class="link-back")
-              a(class="link-back__link", href='/tree?branch=' + object.branch + '&path=' + object.path)=".."
-          -if (object.type === 'blob')
-            div(class="blob-object")
-              a(class="blob-object__link", href='/blob?hash=' + object.hash + '&path=' + object.path + '&branch=' + object.branch)=object.name
-          -if (object.type === 'tree')
-            div(class="tree-object")
-              a(class="tree-object__link", href='/tree?hash=' + object.hash + '&path=' + object.path + '&branch=' + object.branch)=object.name
+    div(class="tree-page")
+      h1(class="tree-page__title")=branch
+      nav(class="tree-page__navigation navigation")
+        each item in navigation
+          a(class="navigation__link", href=item.href)=item.name
+      ul(class="tree-list")
+        each object in objects
+          li(class="tree-list__item")
+            -if (object.type === 'link-back')
+              div(class="link-back")
+                a(class="link-back__link", href='/tree?branch=' + object.branch + '&path=' + object.path)=".."
+            -if (object.type === 'blob')
+              div(class="blob-object")
+                a(class="blob-object__link", href='/blob?hash=' + object.hash + '&path=' + object.path + '&branch=' + object.branch)=object.name
+            -if (object.type === 'tree')
+              div(class="tree-object")
+                a(class="tree-object__link", href='/tree?hash=' + object.hash + '&path=' + object.path + '&branch=' + object.branch)=object.name

@@ -3,5 +3,10 @@ html
   head
     title="Blob"
   body
-    div(class="blob")
-      pre(class="blob__content")=blob
+    div(class="blob-page")
+      h1(class="blob-page__title")=branch
+      nav(class="blob-page__navigation navigation")
+        each item in navigation
+          a(class="navigation__link", href=item.href)=item.name
+      div(class="blob")
+        pre(class="blob__content")=blob

@@ -3,9 +3,11 @@ html
   head
     title="Log"
   body
-    ul(class="commits-list")
-      each commit in commits
-        li(class="commits-list__item")
-          div(class="commit")
-            span(class="commit__subject")=commit.subject
-            a(class="commit__tree", href="/tree?branch=" + commit.hash)="tree"
+    div(class="log-page")
+      h1(class="log-page__branch-name")=branch
+      ul(class="commits-list")
+        each commit in commits
+          li(class="commits-list__item")
+            div(class="commit")
+              span(class="commit__subject")=commit.subject
+              a(class="commit__tree", href="/tree?branch=" + commit.hash)="tree"

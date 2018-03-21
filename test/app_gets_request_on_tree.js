@@ -35,12 +35,12 @@ describe('App gets request on /tree', () => {
       })
       .then(() => server.start())
       .then(() => getTree(config.repoPath, commitHash))
-      .then((objects) => {
+      .then(({objects}) => {
         dirObj = objects.find((object) => object.path === 'dir');
         fileObj = objects.find((object) => object.path === 'file');
       })
       .then(() => getTree(config.repoPath, dirObj.hash))
-      .then((objects) => {
+      .then(({objects}) => {
         fileInDirObj = objects.find((object) => object.path === 'file-in-dir');
       });
   });
@@ -67,18 +67,22 @@ describe('App gets request on /tree', () => {
           '<title>Tree</title>',
           '</head>',
           '<body>',
-            '<ul class="tree-list">',
-              '<li class="tree-list__item">',
-                '<div class="tree-object">',
-                  `<a class="tree-object__link" href="/tree?hash=${dirObj.hash}&amp;path=dir&amp;branch=refs/heads/test">dir</a>`,
-                '</div>',
-              '</li>',
-              '<li class="tree-list__item">',
-                '<div class="blob-object">',
-                  `<a class="blob-object__link" href="/blob?hash=${fileObj.hash}&amp;path=file&amp;branch=refs/heads/test">file</a>`,
-                '</div>',
-              '</li>',
-            '</ul>',
+            '<div class="tree-page">',
+              '<h1 class="tree-page__title">refs/heads/test</h1>',
+              '<nav class="tree-page__navigation navigation"></nav>',
+              '<ul class="tree-list">',
+                '<li class="tree-list__item">',
+                  '<div class="tree-object">',
+                    `<a class="tree-object__link" href="/tree?hash=${dirObj.hash}&amp;path=dir&amp;branch=refs/heads/test">dir</a>`,
+                  '</div>',
+                '</li>',
+                '<li class="tree-list__item">',
+                  '<div class="blob-object">',
+                    `<a class="blob-object__link" href="/blob?hash=${fileObj.hash}&amp;path=file&amp;branch=refs/heads/test">file</a>`,
+                  '</div>',
+                '</li>',
+              '</ul>',
+            '</div>',
           '</body>',
         '</html>'
       ].join('');
@@ -105,18 +109,25 @@ describe('App gets request on /tree', () => {
           '<title>Tree</title>',
           '</head>',
           '<body>',
-            '<ul class="tree-list">',
-              '<li class="tree-list__item">',
-                '<div class="link-back">',
-                  `<a class="link-back__link" href="/tree?branch=refs/heads/test&amp;path=">..</a>`,
-                '</div>',
-              '</li>',
-              '<li class="tree-list__item">',
-                '<div class="blob-object">',
-                  `<a class="blob-object__link" href="/blob?hash=${fileInDirObj.hash}&amp;path=dir/file-in-dir&amp;branch=refs/heads/test">file-in-dir</a>`,
-                '</div>',
-              '</li>',
-            '</ul>',
+            '<div class="tree-page">',
+              '<h1 class="tree-page__title">refs/heads/test</h1>',
+              '<nav class="tree-page__navigation navigation">',
+                '<a class="navigation__link" href="/tree?branch=refs/heads/test">root</a>',
+                '<a class="navigation__link" href="/tree?branch=refs/heads/test&amp;path=dir">dir</a>',
+              '</nav>',
+              '<ul class="tree-list">',
+                '<li class="tree-list__item">',
+                  '<div class="link-back">',
+                    `<a class="link-back__link" href="/tree?branch=refs/heads/test&amp;path=">..</a>`,
+                  '</div>',
+                '</li>',
+                '<li class="tree-list__item">',
+                  '<div class="blob-object">',
+                    `<a class="blob-object__link" href="/blob?hash=${fileInDirObj.hash}&amp;path=dir/file-in-dir&amp;branch=refs/heads/test">file-in-dir</a>`,
+                  '</div>',
+                '</li>',
+              '</ul>',
+            '</div>',
           '</body>',
         '</html>'
       ].join('');

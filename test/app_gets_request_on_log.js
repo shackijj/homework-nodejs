@@ -44,30 +44,35 @@ describe('App gets request on /log', () => {
         })
     );
     it('will return the list of commits for test2 branch ', () => {
+      /* eslint-disable indent */
       const expected = [
         '<!DOCTYPE html>',
         '<html>',
-        '<head>',
-        '<title>Log</title>',
-        '</head>',
-        '<body>',
-        '<ul class="commits-list">',
-        '<li class="commits-list__item">',
-        '<div class="commit">',
-        '<span class="commit__subject">Second commit</span>',
-        `<a class="commit__tree" href="/tree?branch=${commits[0].hash}">tree</a>`,
-        '</div>',
-        '</li>',
-        '<li class="commits-list__item">',
-        '<div class="commit">',
-        '<span class="commit__subject">First commit</span>',
-        `<a class="commit__tree" href="/tree?branch=${commits[1].hash}">tree</a>`,
-        '</div>',
-        '</li>',
-        '</ul>',
-        '</body>',
+          '<head>',
+            '<title>Log</title>',
+          '</head>',
+          '<body>',
+            '<div class="log-page">',
+              '<h1 class="log-page__branch-name">refs/heads/test2</h1>',
+              '<ul class="commits-list">',
+                '<li class="commits-list__item">',
+                  '<div class="commit">',
+                    '<span class="commit__subject">Second commit</span>',
+                    `<a class="commit__tree" href="/tree?branch=${commits[0].hash}">tree</a>`,
+                  '</div>',
+                '</li>',
+                '<li class="commits-list__item">',
+                  '<div class="commit">',
+                    '<span class="commit__subject">First commit</span>',
+                    `<a class="commit__tree" href="/tree?branch=${commits[1].hash}">tree</a>`,
+                  '</div>',
+                '</li>',
+              '</ul>',
+            '</div>',
+          '</body>',
         '</html>'
       ].join('');
+      /* eslint-enable indent */
       expect(response).to.equal(expected);
     });
   });
@@ -86,24 +91,29 @@ describe('App gets request on /log', () => {
         })
     );
     it('will return the list of commits for test1 branch ', () => {
+      /* eslint-disable indent */
       const expected = [
         '<!DOCTYPE html>',
         '<html>',
-        '<head>',
-        '<title>Log</title>',
-        '</head>',
-        '<body>',
-        '<ul class="commits-list">',
-        '<li class="commits-list__item">',
-        '<div class="commit">',
-        '<span class="commit__subject">First commit</span>',
-        `<a class="commit__tree" href="/tree?branch=${commits[0].hash}">tree</a>`,
-        '</div>',
-        '</li>',
-        '</ul>',
-        '</body>',
+          '<head>',
+            '<title>Log</title>',
+          '</head>',
+          '<body>',
+            '<div class="log-page">',
+            '<h1 class="log-page__branch-name">refs/heads/test1</h1>',
+              '<ul class="commits-list">',
+                '<li class="commits-list__item">',
+                  '<div class="commit">',
+                    '<span class="commit__subject">First commit</span>',
+                    `<a class="commit__tree" href="/tree?branch=${commits[0].hash}">tree</a>`,
+                  '</div>',
+                '</li>',
+              '</ul>',
+            '</div>',
+          '</body>',
         '</html>'
       ].join('');
+       /* eslint-enable indent */
       expect(response).to.equal(expected);
     });
   });

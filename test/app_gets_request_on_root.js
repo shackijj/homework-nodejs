@@ -35,32 +35,34 @@ describe('App gets request on /', () => {
   );
 
   it('will return the list of branches', () => {
+    /* eslint-disable indent */
     const expected = [
       '<!DOCTYPE html>',
       '<html>',
-      '<head>',
-      '<title>Branches</title>',
-      '</head>',
-      '<body>',
-      '<ul class="branch-list">',
-      '<li class="branch-list__item">',
-      '<div class="branch">',
-      '<span class="branch__name">test1</span>',
-      '<a class="branch__log" href="/log?ref=refs/heads/test1">log</a>',
-      '<a class="branch__tree" href="/tree?branch=refs/heads/test1">tree</a>',
-      '</div>',
-      '</li>',
-      '<li class="branch-list__item">',
-      '<div class="branch">',
-      '<span class="branch__name">test2</span>',
-      '<a class="branch__log" href="/log?ref=refs/heads/test2">log</a>',
-      '<a class="branch__tree" href="/tree?branch=refs/heads/test2">tree</a>',
-      '</div>',
-      '</li>',
-      '</ul>',
-      '</body>',
+        '<head>',
+          '<title>Branches</title>',
+        '</head>',
+        '<body>',
+          '<ul class="branch-list">',
+            '<li class="branch-list__item">',
+              '<div class="branch">',
+                '<span class="branch__name">test1</span>',
+                '<a class="branch__log" href="/log?ref=refs/heads/test1">log</a>',
+                '<a class="branch__tree" href="/tree?branch=refs/heads/test1">tree</a>',
+              '</div>',
+            '</li>',
+            '<li class="branch-list__item">',
+              '<div class="branch">',
+                '<span class="branch__name">test2</span>',
+                '<a class="branch__log" href="/log?ref=refs/heads/test2">log</a>',
+                '<a class="branch__tree" href="/tree?branch=refs/heads/test2">tree</a>',
+              '</div>',
+            '</li>',
+          '</ul>',
+        '</body>',
       '</html>'
     ].join('');
+    /* eslint-enable indent */
     expect(response).to.eql(expected);
   });
 });

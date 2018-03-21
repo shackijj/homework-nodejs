@@ -16,7 +16,7 @@ function getTree (repoPath, id, branch, treePath = '') {
   `;
   return execShell(cmd)
     .then(stdout => {
-      const result = stdout
+      const objects = stdout
         .trim()
         .split('\n')
         .map(line => {
@@ -37,13 +37,31 @@ function getTree (repoPath, id, branch, treePath = '') {
           .slice(0, -1)
           .join('/');
 
-        result.unshift({
+        objects.unshift({
           type: 'link-back',
           path,
           branch
         });
       };
-      return result;
+
+      const navigation = [];
+      if (treePath) {
+        const dirs = treePath
+          .split('/')
+          .filter(item => item !== '')
+          .forEach((dir, idx, ary) => {
+            const path = (idx > 0 ? ary[idx - 1] + '/' : '')  + dir ;
+            navigation.push({
+              name: dir,
+              href: `/tree?branch=${branch}&path=${path}`
+            });
+          });
+        navigation.unshift({
+          name: 'root',
+          href: `/tree?branch=${branch}`
+        });
+      }
+      return { objects, navigation };
     });
 };
 

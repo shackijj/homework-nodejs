@@ -15,9 +15,10 @@ describe('App gets request on /blob', () => {
       git checkout -b "test";
       mkdir dir;
       touch dir/file-in-dir;
-      touch file;
-      printf "FooBar" > file;
+      printf "file-in-dir" > dir/file-in-dir;
       git add dir/file-in-dir;
+      touch file;
+      printf "file" > file;
       git add file;
       git commit -m "First Commit";
     `)
@@ -45,8 +46,52 @@ describe('App gets request on /blob', () => {
           '<title>Blob</title>',
           '</head>',
           '<body>',
-            '<div class="blob">',
-              '<pre class="blob__content">FooBar</pre>',
+            '<div class="blob-page">',
+              '<h1 class="blob-page__title">refs/heads/test</h1>',
+              '<nav class="blob-page__navigation navigation">',
+                '<a class="navigation__link" href="/tree?branch=refs/heads/test">root</a>',
+                '<a class="navigation__link" href="/tree?branch=refs/heads/test&amp;path=file">file</a>',
+              '</nav>',
+              '<div class="blob">',
+                '<pre class="blob__content">file</pre>',
+              '</div>',
+            '</div>',
+          '</body>',
+        '</html>'
+      ].join('');
+      /* eslint-enable indent */
+
+      expect(response).to.equal(expected);
+    });
+  });
+
+  describe('given that "branch" and "path" params are given', () => {
+    let response;
+    before(() =>
+      rp(`http://${config.host}:${config.port}/blob?ref=refs/heads/test&path=dir/file-in-dir`)
+        .then((html) => {
+          response = html;
+        })
+    );
+    it('will return content of the file and the navigation', () => {
+      /* eslint-disable indent */
+      const expected = [
+        '<!DOCTYPE html>',
+          '<html>',
+          '<head>',
+          '<title>Blob</title>',
+          '</head>',
+          '<body>',
+            '<div class="blob-page">',
+              '<h1 class="blob-page__title">refs/heads/test</h1>',
+              '<nav class="blob-page__navigation navigation">',
+                '<a class="navigation__link" href="/tree?branch=refs/heads/test">root</a>',
+                '<a class="navigation__link" href="/tree?branch=refs/heads/test&amp;path=dir">dir</a>',
+                '<a class="navigation__link" href="/tree?branch=refs/heads/test&amp;path=dir/file-in-dir">file-in-dir</a>',
+              '</nav>',
+              '<div class="blob">',
+                '<pre class="blob__content">file-in-dir</pre>',
+              '</div>',
             '</div>',
           '</body>',
         '</html>'
