@@ -10,4 +10,4 @@ html
           li(class="commits-list__item")
             div(class="commit")
               span(class="commit__subject")=commit.subject
-              a(class="commit__tree", href="/tree?branch=" + commit.hash)="tree"
+              a(class="commit__tree", href="/tree?commit=" + commit.hash)="tree"

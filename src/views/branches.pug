@@ -9,4 +9,4 @@ html
           div(class="branch")
             span(class="branch__name")=branch
             a(class="branch__log", href="/log?ref=refs/heads/" + branch)="log"
-            a(class="branch__tree", href="/tree?branch=refs/heads/" + branch)="tree"
+            a(class="branch__tree", href="/tree?commit=refs/heads/" + branch)="tree"

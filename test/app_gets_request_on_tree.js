@@ -1,7 +1,7 @@
 const createServer = require('../src/createServer');
 const execShell = require('../src/utils/execShell');
 const config = require('../config/test.json');
-const getTree = require('../src/utils/git/getTree');
+const getTree = require('../src/controllers/getTree');
 
 const rp = require('request-promise');
 const { expect } = require('chai');
@@ -53,7 +53,7 @@ describe('App gets request on /tree', () => {
   describe('given that requested object is a tree and "path" param is not given', () => {
     let response;
     before(() =>
-      rp(`http://${config.host}:${config.port}/tree?hash=${commitHash}&branch=refs/heads/test`)
+      rp(`http://${config.host}:${config.port}/tree?hash=${commitHash}&commit=refs/heads/test`)
         .then((html) => {
           response = html;
         })
@@ -73,12 +73,12 @@ describe('App gets request on /tree', () => {
               '<ul class="tree-list">',
                 '<li class="tree-list__item">',
                   '<div class="tree-object">',
-                    `<a class="tree-object__link" href="/tree?hash=${dirObj.hash}&amp;path=dir&amp;branch=refs/heads/test">dir</a>`,
+                    `<a class="tree-object__link" href="/tree?hash=${dirObj.hash}&amp;path=dir&amp;commit=refs/heads/test">dir</a>`,
                   '</div>',
                 '</li>',
                 '<li class="tree-list__item">',
                   '<div class="blob-object">',
-                    `<a class="blob-object__link" href="/blob?hash=${fileObj.hash}&amp;path=file&amp;branch=refs/heads/test">file</a>`,
+                    `<a class="blob-object__link" href="/blob?hash=${fileObj.hash}&amp;path=file&amp;commit=refs/heads/test">file</a>`,
                   '</div>',
                 '</li>',
               '</ul>',
@@ -95,7 +95,7 @@ describe('App gets request on /tree', () => {
   describe('given that requested object is a tree and the path param is "dir"', () => {
     let response;
     before(() =>
-      rp(`http://${config.host}:${config.port}/tree?hash=${dirObj.hash}&path=dir&branch=refs/heads/test`)
+      rp(`http://${config.host}:${config.port}/tree?hash=${dirObj.hash}&path=dir&commit=refs/heads/test`)
         .then((html) => {
           response = html;
         })
@@ -112,18 +112,18 @@ describe('App gets request on /tree', () => {
             '<div class="tree-page">',
               '<h1 class="tree-page__title">refs/heads/test</h1>',
               '<nav class="tree-page__navigation navigation">',
-                '<a class="navigation__link" href="/tree?branch=refs/heads/test">root</a>',
-                '<a class="navigation__link" href="/tree?branch=refs/heads/test&amp;path=dir">dir</a>',
+                '<a class="navigation__link" href="/tree?commit=refs/heads/test">root</a>',
+                '<a class="navigation__link" href="/tree?commit=refs/heads/test&amp;path=dir">dir</a>',
               '</nav>',
               '<ul class="tree-list">',
                 '<li class="tree-list__item">',
                   '<div class="link-back">',
-                    `<a class="link-back__link" href="/tree?branch=refs/heads/test&amp;path=">..</a>`,
+                    `<a class="link-back__link" href="/tree?commit=refs/heads/test&amp;path=">..</a>`,
                   '</div>',
                 '</li>',
                 '<li class="tree-list__item">',
                   '<div class="blob-object">',
-                    `<a class="blob-object__link" href="/blob?hash=${fileInDirObj.hash}&amp;path=dir/file-in-dir&amp;branch=refs/heads/test">file-in-dir</a>`,
+                    `<a class="blob-object__link" href="/blob?hash=${fileInDirObj.hash}&amp;path=dir/file-in-dir&amp;commit=refs/heads/test">file-in-dir</a>`,
                   '</div>',
                 '</li>',
               '</ul>',

@@ -1,10 +1,10 @@
 const express = require('express');
 const path = require('path');
-const getBranches = require('./utils/git/getBranches');
-const getBranchCommits = require('./utils/git/getBranchCommits');
-const getTree = require('./utils/git/getTree');
-const getBlob = require('./utils/git/getBlob');
-const treeNavigation = require('./utils/git/treeNavigation');
+const getBranches = require('./controllers/getBranches');
+const getBranchCommits = require('./controllers/getBranchCommits');
+const getTree = require('./controllers/getTree');
+const getBlob = require('./controllers/getBlob');
+const treeNavigation = require('./controllers/treeNavigation');
 
 function createServer (config) {
   const app = express();
@@ -26,18 +26,18 @@ function createServer (config) {
   });
 
   app.get('/tree', (req, res) => {
-    getTree(config.repoPath, req.query.hash, req.query.branch, req.query.path)
+    getTree(config.repoPath, req.query.hash, req.query.commit, req.query.path)
       .then(({objects, navigation}) => {
-        res.render('tree', { objects, navigation, branch: req.query.branch });
+        res.render('tree', { objects, navigation, commit: req.query.commit });
       })
       .catch(error => res.render('error', { error }));
   });
 
   app.get('/blob', (req, res) => {
-    getBlob(config.repoPath, req.query.ref, req.query.path)
+    getBlob(config.repoPath, req.query.commit, req.query.path)
       .then(blob => {
-        const navigation = treeNavigation(req.query.path, req.query.ref);
-        res.render('blob', { blob, navigation, branch: req.query.ref });
+        const navigation = treeNavigation(req.query.path, req.query.commit);
+        res.render('blob', { blob, navigation, branch: req.query.commit });
       })
       .catch(error => res.render('error', { error }));
   });

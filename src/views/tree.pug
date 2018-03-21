@@ -4,7 +4,7 @@ html
     title="Tree"
   body
     div(class="tree-page")
-      h1(class="tree-page__title")=branch
+      h1(class="tree-page__title")=commit
       nav(class="tree-page__navigation navigation")
         each item in navigation
           a(class="navigation__link", href=item.href)=item.name
@@ -13,10 +13,10 @@ html
           li(class="tree-list__item")
             -if (object.type === 'link-back')
               div(class="link-back")
-                a(class="link-back__link", href='/tree?branch=' + object.branch + '&path=' + object.path)=".."
+                a(class="link-back__link", href='/tree?commit=' + object.commit + '&path=' + object.path)=".."
             -if (object.type === 'blob')
               div(class="blob-object")
-                a(class="blob-object__link", href='/blob?hash=' + object.hash + '&path=' + object.path + '&branch=' + object.branch)=object.name
+                a(class="blob-object__link", href='/blob?hash=' + object.hash + '&path=' + object.path + '&commit=' + object.commit)=object.name
             -if (object.type === 'tree')
               div(class="tree-object")
-                a(class="tree-object__link", href='/tree?hash=' + object.hash + '&path=' + object.path + '&branch=' + object.branch)=object.name
+                a(class="tree-object__link", href='/tree?hash=' + object.hash + '&path=' + object.path + '&commit=' + object.commit)=object.name

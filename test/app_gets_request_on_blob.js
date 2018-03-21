@@ -32,7 +32,7 @@ describe('App gets request on /blob', () => {
   describe('given that "branch" and "path" params are given', () => {
     let response;
     before(() =>
-      rp(`http://${config.host}:${config.port}/blob?ref=refs/heads/test&path=file`)
+      rp(`http://${config.host}:${config.port}/blob?commit=refs/heads/test&path=file`)
         .then((html) => {
           response = html;
         })
@@ -49,8 +49,8 @@ describe('App gets request on /blob', () => {
             '<div class="blob-page">',
               '<h1 class="blob-page__title">refs/heads/test</h1>',
               '<nav class="blob-page__navigation navigation">',
-                '<a class="navigation__link" href="/tree?branch=refs/heads/test">root</a>',
-                '<a class="navigation__link" href="/tree?branch=refs/heads/test&amp;path=file">file</a>',
+                '<a class="navigation__link" href="/tree?commit=refs/heads/test">root</a>',
+                '<a class="navigation__link" href="/tree?commit=refs/heads/test&amp;path=file">file</a>',
               '</nav>',
               '<div class="blob">',
                 '<pre class="blob__content">file</pre>',
@@ -68,7 +68,7 @@ describe('App gets request on /blob', () => {
   describe('given that "branch" and "path" params are given', () => {
     let response;
     before(() =>
-      rp(`http://${config.host}:${config.port}/blob?ref=refs/heads/test&path=dir/file-in-dir`)
+      rp(`http://${config.host}:${config.port}/blob?commit=refs/heads/test&path=dir/file-in-dir`)
         .then((html) => {
           response = html;
         })
@@ -85,9 +85,9 @@ describe('App gets request on /blob', () => {
             '<div class="blob-page">',
               '<h1 class="blob-page__title">refs/heads/test</h1>',
               '<nav class="blob-page__navigation navigation">',
-                '<a class="navigation__link" href="/tree?branch=refs/heads/test">root</a>',
-                '<a class="navigation__link" href="/tree?branch=refs/heads/test&amp;path=dir">dir</a>',
-                '<a class="navigation__link" href="/tree?branch=refs/heads/test&amp;path=dir/file-in-dir">file-in-dir</a>',
+                '<a class="navigation__link" href="/tree?commit=refs/heads/test">root</a>',
+                '<a class="navigation__link" href="/tree?commit=refs/heads/test&amp;path=dir">dir</a>',
+                '<a class="navigation__link" href="/tree?commit=refs/heads/test&amp;path=dir/file-in-dir">file-in-dir</a>',
               '</nav>',
               '<div class="blob">',
                 '<pre class="blob__content">file-in-dir</pre>',
