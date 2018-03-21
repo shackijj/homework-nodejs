@@ -31,7 +31,7 @@ function getTreeViewModel (repoPath, id, commit, treePath = '') {
 
         objects.unshift({
           type: 'link-back',
-          href: `/tree?commit=${commit}&path=${path}`,
+          href: `/tree?commit=${commit}&path=${path}`
         });
       };
 
