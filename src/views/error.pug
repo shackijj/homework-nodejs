@@ -1,7 +1,8 @@
-doctype html
-html
-  head
-    title="Error"
-  body
-    h1="Oops, error"
-    pre=error
+extends ./layout.pug
+
+block append head
+  title="Error"
+
+block append content
+  h1="Oops, error"
+  pre=error

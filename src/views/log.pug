@@ -1,14 +1,15 @@
-doctype html
-html
-  head
-    title="Log"
-  body
-    div(class="log-page")
-      h1(class="log-page__branch-name")=branch
-      ul(class="commits-list")
-        each commit in commits
-          li(class="commits-list__item")
-            div(class="commit")
-              span(class="commit__date")=commit.date
-              span(class="commit__subject")=commit.subject
-              a(class="commit__tree", href="/tree?commit=" + commit.hash)="tree"
+extends ./layout.pug
+
+block append head
+  title="Log"
+
+block append content
+  div(class="log-page")
+    h1(class="log-page__branch-name")=branch
+    ul(class="commits-list")
+      each commit in commits
+        li(class="commits-list__item")
+          div(class="commit")
+            span(class="commit__date")=commit.date
+            span(class="commit__subject")=commit.subject
+            a(class="commit__tree", href="/tree?commit=" + commit.hash)="tree"

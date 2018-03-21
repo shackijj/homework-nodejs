@@ -1,12 +1,13 @@
-doctype html
-html
-  head
-    title="Branches"
-  body
-    ul(class="branch-list")
-      each branch in branches
-        li(class="branch-list__item")
-          div(class="branch")
-            span(class="branch__name")=branch
-            a(class="branch__log", href="/log?ref=refs/heads/" + branch)="log"
-            a(class="branch__tree", href="/tree?commit=refs/heads/" + branch)="tree"
+extends ./layout.pug
+
+block append head
+  title="Branches"
+
+block append content
+  ul(class="branch-list")
+    each branch in branches
+      li(class="branch-list__item")
+        div(class="branch")
+          span(class="branch__name")=branch
+          a(class="branch__log", href="/log?ref=refs/heads/" + branch)="log"
+          a(class="branch__tree", href="/tree?commit=refs/heads/" + branch)="tree"
