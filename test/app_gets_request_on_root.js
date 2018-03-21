@@ -1,7 +1,6 @@
 const createServer = require('../src/createServer');
 const execShell = require('../src/utils/execShell');
 
-const rp = require('request-promise');
 const { expect } = require('chai');
 const config = require('../config/test');
 
@@ -23,7 +22,7 @@ describe('App gets request on /', () => {
       git commit -m "Second commit";
     `)
       .then(() => server.start())
-      .then(() => rp(`http://${config.host}:${config.port}`))
+      .then(() => server.request('/'))
       .then((html) => {
         response = html;
       });

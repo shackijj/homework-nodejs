@@ -3,7 +3,6 @@ const execShell = require('../src/utils/execShell');
 const config = require('../config/test.json');
 const lsTree = require('../src/utils/git/lsTree');
 
-const rp = require('request-promise');
 const { expect } = require('chai');
 
 describe('App gets request on /tree', () => {
@@ -52,7 +51,7 @@ describe('App gets request on /tree', () => {
   describe('given that requested object is a tree and "path" param is not given', () => {
     let response;
     before(() =>
-      rp(`http://${config.host}:${config.port}/tree?hash=${commitHash}&commit=refs/heads/test`)
+      server.request(`/tree?hash=${commitHash}&commit=refs/heads/test`)
         .then((html) => {
           response = html;
         })
@@ -94,7 +93,7 @@ describe('App gets request on /tree', () => {
   describe('given that requested object is a tree and the path param is "dir"', () => {
     let response;
     before(() =>
-      rp(`http://${config.host}:${config.port}/tree?hash=${dirObj.hash}&path=dir&commit=refs/heads/test`)
+      server.request(`/tree?hash=${dirObj.hash}&path=dir&commit=refs/heads/test`)
         .then((html) => {
           response = html;
         })

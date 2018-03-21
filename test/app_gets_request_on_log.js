@@ -1,7 +1,6 @@
 const createServer = require('../src/createServer');
 const execShell = require('../src/utils/execShell');
 const logForRef = require('../src/utils/git/logForRef');
-const rp = require('request-promise');
 const { expect } = require('chai');
 const config = require('../config/test');
 
@@ -33,7 +32,7 @@ describe('App gets request on /log', () => {
     let response;
     let commits;
     before(() =>
-      rp(`http://${config.host}:${config.port}/log?ref=refs/heads/test2`)
+      server.request(`/log?ref=refs/heads/test2`)
         .then((html) => {
           response = html;
         })
@@ -80,7 +79,7 @@ describe('App gets request on /log', () => {
     let response;
     let commits;
     before(() =>
-      rp(`http://${config.host}:${config.port}/log?ref=refs/heads/test1`)
+      server.request(`/log?ref=refs/heads/test1`)
         .then((html) => {
           response = html;
         })

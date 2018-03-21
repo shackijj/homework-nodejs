@@ -1,6 +1,5 @@
 const createServer = require('../src/createServer');
 const execShell = require('../src/utils/execShell');
-const rp = require('request-promise');
 const { expect } = require('chai');
 const config = require('../config/test');
 
@@ -32,7 +31,7 @@ describe('App gets request on /blob', () => {
   describe('given that "commit" and "path" params are given', () => {
     let response;
     before(() =>
-      rp(`http://${config.host}:${config.port}/blob?commit=refs/heads/test&path=file`)
+      server.request(`/blob?commit=refs/heads/test&path=file`)
         .then((html) => {
           response = html;
         })
@@ -68,7 +67,7 @@ describe('App gets request on /blob', () => {
   describe('given that the requested blob is in subdirectory', () => {
     let response;
     before(() =>
-      rp(`http://${config.host}:${config.port}/blob?commit=refs/heads/test&path=dir/file-in-dir`)
+      server.request(`/blob?commit=refs/heads/test&path=dir/file-in-dir`)
         .then((html) => {
           response = html;
         })
