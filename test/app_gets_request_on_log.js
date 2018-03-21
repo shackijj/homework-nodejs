@@ -1,6 +1,6 @@
-const createServer = require('../src/createServer');
-const execShell = require('../src/utils/execShell');
-const logForRef = require('../src/utils/git/logForRef');
+const createServer = require('../createServer');
+const execShell = require('../utils/execShell');
+const logForRef = require('../utils/git/logForRef');
 const { expect } = require('chai');
 const config = require('../config/test');
 

@@ -1,5 +1,5 @@
 const config = require('./config/default.json');
-const createServer = require('./src/createServer');
+const createServer = require('./createServer');
 
 const server = createServer(config);
 
