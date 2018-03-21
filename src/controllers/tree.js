@@ -8,18 +8,17 @@ const treeNavigation = require('./treeNavigation');
  * @param {string} commit
  * @param {string} treePath
  */
-function getTree (repoPath, id, commit, treePath = '') {
+function getTreeViewModel (repoPath, id, commit, treePath = '') {
   const lsTreeOptions = id ? id : `${commit}:${treePath}`;
   return lsTree(repoPath, lsTreeOptions)
     .then(treeObjects => {
       const objects = treeObjects
         .map(({type, hash, path}) => {
+          const linkPath = treePath ? `${treePath}/${path}` : path;
           return {
             type,
-            path: treePath ? `${treePath}/${path}` : path,
             name: path,
-            hash,
-            commit
+            href: `/${type}?hash=${hash}&path=${linkPath}&commit=${commit}`
           };
         });
 
@@ -32,22 +31,19 @@ function getTree (repoPath, id, commit, treePath = '') {
 
         objects.unshift({
           type: 'link-back',
-          path,
-          commit
+          href: `/tree?commit=${commit}&path=${path}`,
         });
       };
 
-      return {
-        objects,
-        navigation: treePath ? treeNavigation(treePath, commit) : []
-      };
+      return objects;
     });
 };
 
 function tree ({repoPath}) {
   return ({query: {hash, commit, path}}, res) => {
-    getTree(repoPath, hash, commit, path)
-      .then(({objects, navigation}) => {
+    getTreeViewModel(repoPath, hash, commit, path)
+      .then((objects) => {
+        const navigation = path ? treeNavigation(path, commit) : [];
         res.render('tree', { objects, navigation, commit });
       })
       .catch(error => res.render('error', { error }));
