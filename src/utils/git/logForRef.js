@@ -9,7 +9,7 @@ function logForRef (repoPath, refPath) {
   const cmd = `
     cd ${repoPath};
     REV_HASH=$(git show-ref --hash ${refPath});
-    git log $REV_HASH --pretty='format:%s;%H'
+    git --no-pager log $REV_HASH --pretty='format:%s;%H;%aI'
   `;
   return execShell(cmd)
     .then((stdout) => {
@@ -17,8 +17,8 @@ function logForRef (repoPath, refPath) {
         .trim()
         .split('\n')
         .map((line) => {
-          const [subject, hash] = line.split(';');
-          return { subject, hash };
+          const [subject, hash, date] = line.split(';');
+          return { subject, hash, date };
         });
     });
 };
