@@ -10,7 +10,10 @@
     },
     "overrides": [
         {
-            "files": ["test/**/*.js"],
+            "files": [
+                "integration_tests/**/*.js",
+                "unit_tests/**/*.js"
+            ],
             "env": {
                 "mocha": true
             }
