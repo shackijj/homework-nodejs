@@ -1,15 +1,15 @@
-const execShell = require('../execShell');
-
+const execShell = require('../utils/execShell');
+const treeNavigation = require('./treeNavigation');
 /**
  * @see https://git-scm.com/docs/git-ls-tree
  * @param {string} repoPath
  * @param {string} id
  * @param {string} path
- * @param {string} branch
+ * @param {string} commit
  * @return {Promise}
  */
-function getTree (repoPath, id, branch, treePath = '') {
-  const lsTreeOptions = id ? id : `${branch}:${treePath}`;
+function getTree (repoPath, id, commit, treePath = '') {
+  const lsTreeOptions = id ? id : `${commit}:${treePath}`;
   const cmd = `
     cd ${repoPath};
     git ls-tree ${lsTreeOptions};
@@ -26,7 +26,7 @@ function getTree (repoPath, id, branch, treePath = '') {
             path: treePath ? `${treePath}/${path}` : path,
             name: path,
             hash,
-            branch
+            commit
           };
         });
 
@@ -40,28 +40,14 @@ function getTree (repoPath, id, branch, treePath = '') {
         objects.unshift({
           type: 'link-back',
           path,
-          branch
+          commit
         });
       };
 
-      const navigation = [];
-      if (treePath) {
-        const dirs = treePath
-          .split('/')
-          .filter(item => item !== '')
-          .forEach((dir, idx, ary) => {
-            const path = (idx > 0 ? ary[idx - 1] + '/' : '')  + dir ;
-            navigation.push({
-              name: dir,
-              href: `/tree?branch=${branch}&path=${path}`
-            });
-          });
-        navigation.unshift({
-          name: 'root',
-          href: `/tree?branch=${branch}`
-        });
-      }
-      return { objects, navigation };
+      return {
+        objects,
+        navigation: treePath ? treeNavigation(treePath, commit) : []
+      };
     });
 };
 

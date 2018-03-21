@@ -7,13 +7,13 @@ function treeNavigation (path, branch) {
       const path = (idx > 0 ? ary[idx - 1] + '/' : '')  + dir ;
       navigation.push({
         name: dir,
-        href: `/tree?branch=${branch}&path=${path}`
+        href: `/tree?commit=${branch}&path=${path}`
       });
     });
 
   navigation.unshift({
     name: 'root',
-    href: `/tree?branch=${branch}`
+    href: `/tree?commit=${branch}`
   });
   return navigation;
 };

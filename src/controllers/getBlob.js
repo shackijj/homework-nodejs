@@ -1,4 +1,4 @@
-const execShell = require('../execShell');
+const execShell = require('../utils/execShell');
 
 /**
  * @param {string} repoPath
