@@ -29,7 +29,7 @@ describe('App gets request on /blob', () => {
     execShell(`rm -rf ${config.repoPath}`)
       .then(() => server.stop())
   );
-  describe('given that "branch" and "path" params are given', () => {
+  describe('given that "commit" and "path" params are given', () => {
     let response;
     before(() =>
       rp(`http://${config.host}:${config.port}/blob?commit=refs/heads/test&path=file`)
@@ -65,7 +65,7 @@ describe('App gets request on /blob', () => {
     });
   });
 
-  describe('given that "branch" and "path" params are given', () => {
+  describe('given that the requested blob is in subdirectory', () => {
     let response;
     before(() =>
       rp(`http://${config.host}:${config.port}/blob?commit=refs/heads/test&path=dir/file-in-dir`)
