@@ -1,3 +1,4 @@
+include ./treeNavigation.pug
 doctype html
 html
   head
@@ -5,9 +6,7 @@ html
   body
     div(class="tree-page")
       h1(class="tree-page__title")=commit
-      nav(class="tree-page__navigation navigation")
-        each item in navigation
-          a(class="navigation__link", href=item.href)=item.name
+      +treeNavigation(navigation, "tree-page__navigation")
       ul(class="tree-list")
         each object in objects
           li(class="tree-list__item")

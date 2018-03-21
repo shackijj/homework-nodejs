@@ -1,0 +1,4 @@
+mixin treeNavigation(items, className)
+  nav(class=className + " navigation")
+    each item in items
+      a(class="navigation__link", href=item.href)=item.name
