@@ -1,13 +1,12 @@
 const createServer = require('../src/createServer');
 const execShell = require('../src/utils/execShell');
-const getBranchCommits = require('../src/controllers/getBranchCommits');
+const logForRef = require('../src/utils/git/logForRef');
 const rp = require('request-promise');
 const { expect } = require('chai');
 const config = require('../config/test');
 
 describe('App gets request on /log', () => {
   const server = createServer(config);
-  let response;
   before(() => {
     return execShell(`
       mkdir ${config.repoPath};
@@ -38,7 +37,7 @@ describe('App gets request on /log', () => {
         .then((html) => {
           response = html;
         })
-        .then(() => getBranchCommits(config.repoPath, 'refs/heads/test2'))
+        .then(() => logForRef(config.repoPath, 'refs/heads/test2'))
         .then((result) => {
           commits = result;
         })
@@ -85,7 +84,7 @@ describe('App gets request on /log', () => {
         .then((html) => {
           response = html;
         })
-        .then(() => getBranchCommits(config.repoPath, 'refs/heads/test1'))
+        .then(() => logForRef(config.repoPath, 'refs/heads/test1'))
         .then((result) => {
           commits = result;
         })

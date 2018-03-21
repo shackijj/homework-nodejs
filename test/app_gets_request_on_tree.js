@@ -1,14 +1,13 @@
 const createServer = require('../src/createServer');
 const execShell = require('../src/utils/execShell');
 const config = require('../config/test.json');
-const getTree = require('../src/controllers/getTree');
+const lsTree = require('../src/utils/git/lsTree');
 
 const rp = require('request-promise');
 const { expect } = require('chai');
 
 describe('App gets request on /tree', () => {
   const server = createServer(config);
-  let response;
   let commitHash;
   let dirObj;
   let fileObj;
@@ -34,13 +33,13 @@ describe('App gets request on /tree', () => {
         commitHash = stdout.trim();
       })
       .then(() => server.start())
-      .then(() => getTree(config.repoPath, commitHash))
-      .then(({objects}) => {
+      .then(() => lsTree(config.repoPath, commitHash))
+      .then((objects) => {
         dirObj = objects.find((object) => object.path === 'dir');
         fileObj = objects.find((object) => object.path === 'file');
       })
-      .then(() => getTree(config.repoPath, dirObj.hash))
-      .then(({objects}) => {
+      .then(() => lsTree(config.repoPath, dirObj.hash))
+      .then((objects) => {
         fileInDirObj = objects.find((object) => object.path === 'file-in-dir');
       });
   });
