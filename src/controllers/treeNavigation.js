@@ -1,6 +1,6 @@
 function treeNavigation (path, branch) {
   const navigation = [];
-  const dirs = path
+  path
     .split('/')
     .filter(item => item !== '')
     .forEach((dir, idx, ary) => {

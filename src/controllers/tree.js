@@ -1,26 +1,19 @@
-const execShell = require('../utils/execShell');
+const lsTree = require('../utils/git/lsTree');
 const treeNavigation = require('./treeNavigation');
+
 /**
- * @see https://git-scm.com/docs/git-ls-tree
+ *
  * @param {string} repoPath
  * @param {string} id
- * @param {string} path
  * @param {string} commit
- * @return {Promise}
+ * @param {string} treePath
  */
 function getTree (repoPath, id, commit, treePath = '') {
   const lsTreeOptions = id ? id : `${commit}:${treePath}`;
-  const cmd = `
-    cd ${repoPath};
-    git ls-tree ${lsTreeOptions};
-  `;
-  return execShell(cmd)
-    .then(stdout => {
-      const objects = stdout
-        .trim()
-        .split('\n')
-        .map(line => {
-          const [mode, type, hash, path] = line.split(/\s+/);
+  return lsTree(repoPath, lsTreeOptions)
+    .then(treeObjects => {
+      const objects = treeObjects
+        .map(({type, hash, path}) => {
           return {
             type,
             path: treePath ? `${treePath}/${path}` : path,
@@ -51,4 +44,14 @@ function getTree (repoPath, id, commit, treePath = '') {
     });
 };
 
-module.exports = getTree;
+function tree ({repoPath}) {
+  return ({query: {hash, commit, path}}, res) => {
+    getTree(repoPath, hash, commit, path)
+      .then(({objects, navigation}) => {
+        res.render('tree', { objects, navigation, commit });
+      })
+      .catch(error => res.render('error', { error }));
+  };
+}
+
+module.exports = tree;
