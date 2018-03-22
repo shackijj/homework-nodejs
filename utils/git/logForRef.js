@@ -9,7 +9,7 @@ function logForRef (repoPath, refPath) {
   const cmd = `
     cd ${repoPath};
     REV_HASH=$(git show-ref --hash ${refPath});
-    git --no-pager log $REV_HASH --pretty='format:%s;%H;%aI'
+    git --no-pager log $REV_HASH --pretty='format:%s;%H;%ai'
   `;
   return execShell(cmd)
     .then((stdout) => {
