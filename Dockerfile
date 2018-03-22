@@ -5,12 +5,10 @@ RUN cd /var/app/ && git clone https://github.com/libgit2/libgit2
 
 WORKDIR /usr/src/app
 
-COPY package*.json ./
-
-RUN npm install
-
 COPY . .
 
+RUN npm install
+RUN npm run build
 
 EXPOSE 3000
 
