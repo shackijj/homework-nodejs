@@ -6,7 +6,7 @@ function tree ({repoPath}) {
     getTreeViewModel(repoPath, hash, commit, path)
       .then((objects) => {
         const navigation = path ? treeNavigation(path, commit) : [];
-        res.render('tree', { objects, navigation, commit });
+        res.render('tree', { objects, navigation, commit, title: commit });
       })
       .catch(error => res.render('error', { error }));
   };

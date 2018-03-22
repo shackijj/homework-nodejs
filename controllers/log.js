@@ -7,7 +7,7 @@ const logForRef = require('../utils/git/logForRef');
 function log ({repoPath}) {
   return ({query: {ref}}, res) => {
     logForRef(repoPath, ref)
-      .then(commits => res.render('log', { commits, branch: ref}))
+      .then(commits => res.render('log', { commits, branch: ref, title: ref }))
       .catch(error => res.render('error', { error }));
   };
 };

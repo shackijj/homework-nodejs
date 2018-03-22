@@ -21,6 +21,9 @@ describe('#getBlobRequest', () => {
     it('will return commit\'s name', () => {
       expect(result.commit).to.equal('refs/heads/test');
     });
+    it('will return title for a page', () => {
+      expect(result.title).to.equal('refs/heads/test');
+    });
   }
 
   describe('given that the file is in subdirectory', () => {

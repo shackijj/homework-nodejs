@@ -7,7 +7,7 @@ const getBranchesRequest = require('./getBranchesRequest');
 function branches ({repoPath}) {
   return (req, res) => {
     getBranchesRequest(repoPath)
-      .then(branches => res.render('branches', { branches }))
+      .then(branches => res.render('branches', { branches, title: 'branches' }))
       .catch(error => res.render('error', { error }));
   };
 };
