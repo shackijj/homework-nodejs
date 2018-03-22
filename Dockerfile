@@ -1,14 +1,13 @@
 FROM node:carbon
 
-RUN mkdir -p /var/app/
-RUN cd /var/app/ && git clone https://github.com/libgit2/libgit2
-
 WORKDIR /usr/src/app
 
 COPY . .
 
 RUN npm install
 RUN npm run build
+
+RUN git clone https://github.com/libgit2/libgit2 /use/src/app/test-data
 
 EXPOSE 3000
 

@@ -1,5 +1,5 @@
 {
-  "repoPath": "/var/app/libgit2",
+  "repoPath": "/use/src/app/test-data",
   "host": "127.0.0.1",
   "port": 3000
 }
