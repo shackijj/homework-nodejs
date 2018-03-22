@@ -2,14 +2,14 @@ const execShell = require('../execShell');
 
 /**
  * @param {string} repoPath
- * @param {string} branch
+ * @param {string} commit
  * @param {string} path
  * @return {Promise}
  */
-function getBlob (repoPath, branch, path) {
+function getBlob (repoPath, commit, path) {
   const cmd = `
     cd ${repoPath};
-    git show $(cat .git/${branch}):${path};
+    git show ${commit}:${path};
   `;
   return execShell(cmd);
 };
