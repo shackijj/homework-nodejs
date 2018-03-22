@@ -1,6 +1,6 @@
 {
   "events": {
-    "restart": "npm run build:styles"
+    "restart": "npm run build:dev"
   },
   "ignore": [
     "public"
