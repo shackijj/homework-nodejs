@@ -8,6 +8,6 @@ block append content
     each branch in branches
       li(class="branch-list__item")
         div(class="branch")
-          span(class="branch__name")=branch
-          a(class="branch__log", href="/log?ref=refs/heads/" + branch)="log"
-          a(class="branch__tree", href="/tree?commit=refs/heads/" + branch)="tree"
+          span(class="branch__name")=branch.name
+          a(class="branch__log", href=branch.logHref)="log"
+          a(class="branch__tree", href=branch.treeHref)="tree"

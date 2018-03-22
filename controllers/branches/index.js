@@ -1,4 +1,4 @@
-const forEachRef = require('../utils/git/forEachRef');
+const getBranchesRequest = require('./getBranchesRequest');
 
 /**
  *
@@ -6,7 +6,7 @@ const forEachRef = require('../utils/git/forEachRef');
  */
 function branches ({repoPath}) {
   return (req, res) => {
-    forEachRef(repoPath)
+    getBranchesRequest(repoPath)
       .then(branches => res.render('branches', { branches }))
       .catch(error => res.render('error', { error }));
   };
