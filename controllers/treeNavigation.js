@@ -13,7 +13,7 @@ function treeNavigation (path, branch) {
 
       navigation.push({
         name: dir,
-        href: `/tree?commit=${branch}&path=${path}`
+        href: ary.length - 1 === idx ? '' : `/tree?commit=${branch}&path=${path}`
       });
     });
 

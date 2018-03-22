@@ -45,7 +45,7 @@ describe('#getBlobRequest', () => {
         },
         {
           name: 'file-in-dir',
-          href: '/tree?commit=refs/heads/test&path=dir/file-in-dir'
+          href: ''
         }
       ]);
     });
@@ -69,7 +69,7 @@ describe('#getBlobRequest', () => {
         },
         {
           name: 'file',
-          href: '/tree?commit=refs/heads/test&path=file'
+          href: ''
         }
       ]);
     });

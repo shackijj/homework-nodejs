@@ -30,7 +30,7 @@ describe('#treeNavigation', () => {
         },
         {
           name: 'dir',
-          href: '/tree?commit=someCommit&path=dir'
+          href: ''
         }
       ]);
     });
@@ -56,7 +56,7 @@ describe('#treeNavigation', () => {
         },
         {
           name: 'dir3',
-          href: '/tree?commit=someCommit&path=dir1/dir2/dir3'
+          href: ''
         }
       ]);
     });
