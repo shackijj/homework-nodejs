@@ -1,6 +1,4 @@
-const lsTree = require('../utils/git/lsTree');
-const treeNavigation = require('./treeNavigation');
-
+const lsTree = require('../../utils/git/lsTree');
 /**
  *
  * @param {string} repoPath
@@ -8,9 +6,9 @@ const treeNavigation = require('./treeNavigation');
  * @param {string} commit
  * @param {string} treePath
  */
-function getTreeViewModel (repoPath, id, commit, treePath = '') {
+function getTreeViewModel (repoPath, id, commit, treePath = '', lsTreeFunc = lsTree) {
   const lsTreeOptions = id ? id : `${commit}:${treePath}`;
-  return lsTree(repoPath, lsTreeOptions)
+  return lsTreeFunc(repoPath, lsTreeOptions)
     .then(treeObjects => {
       const objects = treeObjects
         .map(({type, hash, path}) => {
@@ -39,15 +37,4 @@ function getTreeViewModel (repoPath, id, commit, treePath = '') {
     });
 };
 
-function tree ({repoPath}) {
-  return ({query: {hash, commit, path}}, res) => {
-    getTreeViewModel(repoPath, hash, commit, path)
-      .then((objects) => {
-        const navigation = path ? treeNavigation(path, commit) : [];
-        res.render('tree', { objects, navigation, commit });
-      })
-      .catch(error => res.render('error', { error }));
-  };
-}
-
-module.exports = tree;
+module.exports = getTreeViewModel;
