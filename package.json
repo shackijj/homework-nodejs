@@ -9,6 +9,7 @@
     "build:dev": "npm run clean && postcss --use autoprefixer -d public views/*.css",
     "build": "npm run clean && postcss --no-map --use autoprefixer cssnano -d public views/*.css",
     "lint": "eslint .",
+    "lint:style": "stylelint \"views/*.css\"",
     "start": "nodemon",
     "clean": "rimraf public/"
   },
@@ -28,7 +29,9 @@
     "postcss-import": "^11.1.0",
     "request-promise": "^4.2.2",
     "rimraf": "^2.6.2",
-    "selenium-standalone": "^6.13.0"
+    "selenium-standalone": "^6.13.0",
+    "stylelint": "^9.1.3",
+    "stylelint-config-standard": "^18.2.0"
   },
   "dependencies": {
     "express": "^4.16.3",
