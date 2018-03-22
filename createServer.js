@@ -1,6 +1,5 @@
 const express = require('express');
 const path = require('path');
-const rp = require('request-promise');
 
 const branches = require('./controllers/branches');
 const log = require('./controllers/log');
@@ -36,8 +35,7 @@ function createServer (config) {
         }
         resolve();
       });
-    }),
-    request: (path) => rp(`http://${config.host}:${config.port}${path}`)
+    })
   };
 }
 
