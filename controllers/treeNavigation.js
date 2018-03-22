@@ -4,17 +4,25 @@ function treeNavigation (path, branch) {
     .split('/')
     .filter(item => item !== '')
     .forEach((dir, idx, ary) => {
-      const path = (idx > 0 ? ary[idx - 1] + '/' : '')  + dir ;
+      let path;
+      if (idx === 0) {
+        path = dir;
+      } else {
+        path = ary.slice(0, idx + 1).join('/');
+      }
+
       navigation.push({
         name: dir,
         href: `/tree?commit=${branch}&path=${path}`
       });
     });
 
-  navigation.unshift({
-    name: 'root',
-    href: `/tree?commit=${branch}`
-  });
+  if (navigation.length > 0) {
+    navigation.unshift({
+      name: 'root',
+      href: `/tree?commit=${branch}`
+    });
+  }
   return navigation;
 };
 
