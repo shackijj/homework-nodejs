@@ -10,7 +10,8 @@
     "build": "npm run clean && postcss --no-map --use autoprefixer cssnano -d public views/*.css",
     "lint": "eslint .",
     "lint:style": "stylelint \"views/*.css\"",
-    "start": "nodemon",
+    "start:dev": "nodemon",
+    "start": "node index.js",
     "clean": "rimraf public/"
   },
   "author": "",
