@@ -6,7 +6,7 @@ describe('User opens / page of app', function () {
       .url('/')
       .getTitle()
       .then(function (title) {
-        expect(title).to.equal('Branches');
+        expect(title).to.equal('Git - branches');
       });
   });
 
@@ -25,7 +25,7 @@ describe('User opens / page of app', function () {
         .openUrlAndClick('/', '(//a[@class="branch__log"])[1]')
         .getTitle()
         .then((title) => {
-          expect(title).to.equal('Log');
+          expect(title).to.equal('Git - refs/heads/test1');
         });
     });
 
@@ -34,7 +34,7 @@ describe('User opens / page of app', function () {
         .openUrlAndClick('/', '(//a[@class="branch__tree"])[1]')
         .getTitle()
         .then((title) => {
-          expect(title).to.equal('Tree');
+          expect(title).to.equal('Git - refs/heads/test1');
         });
     });
   });
