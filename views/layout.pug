@@ -1,6 +1,12 @@
 doctype html
 html
   head
+    link(rel="stylesheet", href="layout.css")
     block head
+      title="Git - " + title
   body
-    block content
+    header(class="header")
+      a(class="header", href="/")="Branches"
+    div(class="content")
+      block content
+    footer(class="footer")

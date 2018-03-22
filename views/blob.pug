@@ -1,12 +1,8 @@
 extends ./layout.pug
 include ./treeNavigation.pug
 
-block append head
-  title="Blob"
-
 block append content
-  div(class="blob-page")
-    h1(class="blob-page__title")=commit
-    +treeNavigation(navigation, "blob-page__navigation")
-    div(class="blob")
-      pre(class="blob__content")=blob
+  div(class="blob")
+    h2(class="blob__commit")=commit
+    +treeNavigation(navigation, "blob__navigation")
+    pre(class="blob__content")=blob

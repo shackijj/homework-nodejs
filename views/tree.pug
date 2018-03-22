@@ -1,23 +1,18 @@
 extends ./layout.pug
-
 include ./treeNavigation.pug
 
-block append head
-  title="Tree"
-
 block append content
-  div(class="tree-page")
-    h1(class="tree-page__title")=commit
-    +treeNavigation(navigation, "tree-page__navigation")
-    ul(class="tree-list")
-      each object in objects
-        li(class="tree-list__item")
-          -if (object.type === 'link-back')
-            div(class="link-back")
-              a(class="link-back__link", href=object.href)=".."
-          -if (object.type === 'blob')
-            div(class="blob-object")
-              a(class="blob-object__link", href=object.href)=object.name
-          -if (object.type === 'tree')
-            div(class="tree-object")
-              a(class="tree-object__link", href=object.href)=object.name
+  h1=commit
+  +treeNavigation(navigation, "tree-page__navigation")
+  ul(class="tree-list")
+    each object in objects
+      li(class="tree-list__item")
+        -if (object.type === 'link-back')
+          div(class="link-back")
+            a(class="link-back__link", href=object.href)=".."
+        -if (object.type === 'blob')
+          div(class="blob-object")
+            a(class="blob-object__link", href=object.href)=object.name
+        -if (object.type === 'tree')
+          div(class="tree-object")
+            a(class="tree-object__link", href=object.href)=object.name
