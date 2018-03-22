@@ -1,7 +1,7 @@
 {
   "name": "homework-nodejs",
   "version": "1.0.0",
-  "description": "",
+  "description": "SHRI 2018 homework",
   "main": "index.js",
   "scripts": {
     "test": "mocha \"unit_tests/**/*.js\"",
