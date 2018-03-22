@@ -1,7 +1,10 @@
 extends ./layout.pug
 
+block append head
+  link(rel="stylesheet", href="log.css")
+
 block append content
-  h2(class="log-page__branch-name")="Log for " + branch
+  h2(class="content__header")=commit="Log for " + branch
   ul(class="commits-list")
     each commit in commits
       li(class="commits-list__item")

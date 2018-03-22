@@ -1,9 +1,12 @@
 extends ./layout.pug
-include ./treeNavigation.pug
+include tree-navigation.pug
+
+block append head
+  link(rel="stylesheet", href="tree.css")
 
 block append content
-  h1=commit
-  +treeNavigation(navigation, "tree-page__navigation")
+  h1(class="content__header")="Tree for " + commit
+  +tree-navigation(navigation, "tree-page__navigation")
   ul(class="tree-list")
     each object in objects
       li(class="tree-list__item")

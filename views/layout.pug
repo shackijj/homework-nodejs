@@ -1,12 +1,21 @@
 doctype html
 html
   head
+    title="Git - " + title
+    meta(name="viewport", content="width=device-width")
+    link(rel="stylesheet", href="reset.css")
+    link(rel="stylesheet", href="https://fonts.googleapis.com/css?family=Open+Sans")
     link(rel="stylesheet", href="layout.css")
+
     block head
-      title="Git - " + title
+      
   body
     header(class="header")
-      a(class="header", href="/")="Branches"
+      div(class="header__content")
+        a(class="header", href="/")="Branches"
     div(class="content")
+      block conent-header
+        div(class="conent__header")
+      div(class="content")
       block content
     footer(class="footer")

@@ -1,4 +1,6 @@
-mixin treeNavigation(items, className)
+mixin tree-navigation(items, className)
+  block append head
+    link(rel="stylesheet", href="tree-navigation.css")
   nav(class=className + " navigation")
     each item in items
       a(class="navigation__link", href=item.href)=item.name

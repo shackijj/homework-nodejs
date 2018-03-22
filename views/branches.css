@@ -1,0 +1,9 @@
+.branch-list__item {
+  margin: 5px 0px;
+}
+
+.branch__name,
+.branch__log,
+.branch__tree {
+  margin-left: 5px;
+}

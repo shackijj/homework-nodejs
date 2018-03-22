@@ -1,5 +1,8 @@
 extends ./layout.pug
 
+block append head
+  link(rel="stylesheet", href="branches.css")
+
 block append content
   ul(class="branch-list")
     each branch in branches

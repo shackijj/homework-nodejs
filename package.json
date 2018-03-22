@@ -6,7 +6,7 @@
   "scripts": {
     "test": "mocha \"unit_tests/**/*.js\"",
     "test:integration": "hermione",
-    "build:styles": "postcss --use autoprefixer postcss-import -d public views/*.css",
+    "build:styles": "rm -rf public/ && postcss --use autoprefixer -d public views/*.css",
     "lint": "eslint .",
     "start": "nodemon"
   },
@@ -29,7 +29,6 @@
   "dependencies": {
     "express": "^4.16.3",
     "hermione-simple-environment": "github:shackijj/hermione-simple-environment#master",
-    "pug": "^2.0.1",
-    "reset-css": "^3.0.0"
+    "pug": "^2.0.1"
   }
 }

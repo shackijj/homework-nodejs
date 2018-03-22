@@ -1,0 +1,9 @@
+.commit__date,
+.commit__subject,
+.commit__tree {
+  margin-right: 5px;
+}
+
+.commits-list__item {
+  margin: 5px 0px;
+}

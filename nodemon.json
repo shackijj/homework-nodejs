@@ -1,0 +1,9 @@
+{
+  "events": {
+    "restart": "npm run build:styles"
+  },
+  "ignore": [
+    "public"
+  ],
+  "ext": "css js"
+ }
