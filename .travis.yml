@@ -1,19 +1,12 @@
-dist: trusty
-sudo: required
-addons:
-  firefox: "49.0"
-  chrome: stable
+sudo: false
 language: node_js
+
 node_js:
-  - '8'
+  - 'node'
+  - 8
 
 script:
-  - npm install -g selenium-standalone
-  - selenium-standalone install
-  - selenium-standalone start > /dev/null 2>&1 &
-  - xvfb-run npm run test:integration
   - npm run lint
-  - npm run lint:style
   - npm run test
   - npm run build
 
@@ -27,20 +20,20 @@ aliases:
 
 jobs:
   include:
-  - stage: Deploy (stage)
-    if: tag IS blank
-    script:
-      - npm run build
-    deploy:
-      <<: *deploy
-      app: homework-nodejs-infra
+    - stage: Deploy (stage)
+      if: tag IS blank
+      script:
+        - npm run build
+      deploy:
+        <<: *deploy
+        app: homework-nodejs-infra
 
-  - stage: Deploy (prod)
-    if: tag IS present
-    script:
-      - npm run build
-    deploy:
-      <<: *deploy
-      app: homework-nodejs-infra-prod
-      on:
-        tags: true
+    - stage: Deploy (prod)
+      if: tag IS present
+      script:
+        - npm run build
+      deploy:
+        <<: *deploy
+        app: homework-nodejs-infra-prod
+        on:
+          tags: true
