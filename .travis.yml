@@ -9,7 +9,7 @@ script:
 - npm run build
 jobs:
   include:
-    stage: Deploy
+    stage: preview
     script:
     - npm run build
     deploy:
