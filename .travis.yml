@@ -14,9 +14,9 @@ jobs:
     - npm run build
     deploy:
       provider: heroku
-      app: homework-nodejs-preview
+      app: homework-nodejs
       api_key:
-        secure: rjSDcUCM8dGChKvQDjP2YuJJz0HN4fMa5+hdASH1s1vn7jseeNSEQkZKO80wbRVvwAg23Q1OQ3SJW0C8wWdkdtdbWoPDTGOXw5UudBFVdCsrmmcP3M5/lnuD1To2ORN+dN607GfgCEDS/+AmUijFpOm6aD9Hb4X6dcAOgjqzS94BG3ZNSDbk5X1+BJ6ihfIW7w+rLmpN0y7vR4x9X8MdFHROhlINS/we5FcjqRTeOHJlaflCvb26YsSMnCLgwyZs8IjxEyKb9pBl7m67XnRUwysO0AvmPNrCdTab+fGNbQdkcmzENqWUcDSqiBea/3xprs5MVTU1jetYPGqZXIyiRjw3WZPF9/OUyfVksbGy14lz92FlUkSZkt3w1P1OSo86EQqfw4oK9YRIEMBaHx3X5vkflZtaE1NJ2IpduJe6KHM83l1HiuJkx43TzZijqDFaoULjKB7WwqOtbJkM8z99tFQFlJUMoGiHZbmvzR4qV2GfKCUXPA7KwP+0EemkAUlnTfTqek3YdJFFHuNscC2yzIkfT4kk6OqWIHFoGPDsItQKJiJfxhtvG/FLjgnCUAuQbQfLUdpvy9PT7ELskqz1K29rBoNido+Hz0ifVoXNaqZOfq7nS1Bp+EPc672pWRhrfTcZwetYrJaLMStPae8PErr4GBOBbjMBlBfAZxhRtBI=
+        secure: KYQwX0tfU86XX0MajprEum3mdvJqCq3iu+phut2hzLVGcFT2FXBq2MKW+fpB2NrXCnsV8P4W500jZcTfQaWQ0VaAppIfhZPrK+zRxLQHvTxNGGdMfAs6jiVHaqsO0Wh0fP5i6zJTsyuOJMJ+tF1yNewuz+AI7G54F3Mr2NSztTxi9mYxIitbfOIBk14mknDXLddF2qCkq7hmJU/NSHnwvNvx4SqC78i1RqOAlF7XPugrvoZ7dv9kF3at/hgCMhwMeaXztpwMV0xVbrX5aO/ZV8+2TDtjHe/FhYw+LtXAMEg7ZBIg/lxu3ITLzTrI+yrdw0EtZLXuLjeczqjDwdw2QtI2aI/5EGd/gUxQ6LC0f7Pqx/DZS12Hks30vZnK7idMCWvPZc3hsZop2f/I/9JdmASJGDQhNP/mRaPU0tukfJLVJJoN+Gab1n/kY+SpdhqN/wcbpNSGpnbFn5MB0yQVVQ3BcE+Asr/u6U69WnJKSslMO6JbKBJHWQoQtPD/pR5tADdgzAvV2JgZKdKW7DOh3OD8MCyrrlq8vEscVlX2V1l9msdWngu1XskSDddUzRTod1ME32/RS+ghgRCFu7D7FESJEquUZQNt9S8IA7R1HTFdvDqSMen86DI08ZX/k4rc/6sVbqesIVI2x9wXVHht8LC4g410N6Omye5+hxQPDHI=
       skip_cleanup: true
       on:
         all_branches: true
