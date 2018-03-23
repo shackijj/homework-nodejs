@@ -2,7 +2,11 @@
   "name": "homework-nodejs",
   "scripts": {
   },
+  "image": "Dockerfile",
   "env": {
+    "GIT_DISCOVERY_ACROSS_FILESYSTEM": {
+      "value": "1"
+    }
   },
   "formation": {
   },
