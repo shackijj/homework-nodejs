@@ -1,0 +1,21 @@
+sudo: false
+language: node_js
+node_js:
+- '8'
+script:
+- npm run lint
+- npm run lint:style
+- npm run test
+- npm run build
+
+jobs:
+  include:
+    stage: Deploy
+    script:
+      - npm run build
+    deploy:
+      provider: heroku
+      app: homework-nodejs
+      api_key:
+        secure: rjSDcUCM8dGChKvQDjP2YuJJz0HN4fMa5+hdASH1s1vn7jseeNSEQkZKO80wbRVvwAg23Q1OQ3SJW0C8wWdkdtdbWoPDTGOXw5UudBFVdCsrmmcP3M5/lnuD1To2ORN+dN607GfgCEDS/+AmUijFpOm6aD9Hb4X6dcAOgjqzS94BG3ZNSDbk5X1+BJ6ihfIW7w+rLmpN0y7vR4x9X8MdFHROhlINS/we5FcjqRTeOHJlaflCvb26YsSMnCLgwyZs8IjxEyKb9pBl7m67XnRUwysO0AvmPNrCdTab+fGNbQdkcmzENqWUcDSqiBea/3xprs5MVTU1jetYPGqZXIyiRjw3WZPF9/OUyfVksbGy14lz92FlUkSZkt3w1P1OSo86EQqfw4oK9YRIEMBaHx3X5vkflZtaE1NJ2IpduJe6KHM83l1HiuJkx43TzZijqDFaoULjKB7WwqOtbJkM8z99tFQFlJUMoGiHZbmvzR4qV2GfKCUXPA7KwP+0EemkAUlnTfTqek3YdJFFHuNscC2yzIkfT4kk6OqWIHFoGPDsItQKJiJfxhtvG/FLjgnCUAuQbQfLUdpvy9PT7ELskqz1K29rBoNido+Hz0ifVoXNaqZOfq7nS1Bp+EPc672pWRhrfTcZwetYrJaLMStPae8PErr4GBOBbjMBlBfAZxhRtBI=
+      skip_cleanup: true

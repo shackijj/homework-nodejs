@@ -21,7 +21,7 @@ function createServer (config) {
 
   return {
     start: () => new Promise((resolve, reject) => {
-      server = app.listen(config.port, config.hostname, (err) => {
+      server = app.listen(process.env.PORT || config.port, config.hostname, (err) => {
         if (err) {
           reject(err);
         }
