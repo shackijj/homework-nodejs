@@ -5,7 +5,7 @@ describe('getBranchesRequest', () => {
   let result;
 
   beforeEach(() =>
-    getBranchesRequest('repo/path', forEachRefStub)
+    getBranchesRequest('repo/path', 'refs/heads/', forEachRefStub)
       .then((output) => {
         result = output;
       })

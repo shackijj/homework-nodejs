@@ -1,12 +1,12 @@
 const forEachRef = require('../../utils/git/forEachRef');
 
-function getBranchesRequest (repoPath, forEachRefFunc = forEachRef) {
-  return forEachRefFunc(repoPath)
+function getBranchesRequest (repoPath, refsPattern, forEachRefFunc = forEachRef) {
+  return forEachRefFunc(repoPath, refsPattern)
     .then(refs =>
       refs.map(ref => ({
         name: ref,
-        treeHref: `/tree?commit=refs/heads/${ref}`,
-        logHref: `/log?ref=refs/heads/${ref}`
+        treeHref: `/tree?commit=${ref}`,
+        logHref: `/log?ref=${ref}`
       }))
     );
 }
