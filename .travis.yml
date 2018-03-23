@@ -1,12 +1,19 @@
-sudo: false
+dist: trusty
+sudo: required
+addons:
+  chrome: stable
+
 language: node_js
+
 node_js:
-- '8'
+  - 'node'
+  - 8
+
 script:
-- npm run lint
-- npm run lint:style
-- npm run test
-- npm run build
+  - npm run lint
+  - npm run lint:style
+  - npm run test
+  - npm run build
 
 
 aliases:
@@ -18,20 +25,20 @@ aliases:
 
 jobs:
   include:
-  - stage: Deploy (stage)
-    if: tag IS blank
-    script:
-      - npm run build
-    deploy:
-      <<: *deploy
-      app: homework-nodejs-infra
+    - stage: Deploy (stage)
+      if: tag IS blank
+      script:
+        - npm run build
+      deploy:
+        <<: *deploy
+        app: homework-nodejs-infra
 
-  - stage: Deploy (prod)
-    if: tag IS present
-    script:
-      - npm run build
-    deploy:
-      <<: *deploy
-      app: homework-nodejs-infra-prod
-      on:
-        tags: true
+    - stage: Deploy (prod)
+      if: tag IS present
+      script:
+        - npm run build
+      deploy:
+        <<: *deploy
+        app: homework-nodejs-infra-prod
+        on:
+          tags: true

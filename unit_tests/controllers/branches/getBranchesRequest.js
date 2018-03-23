@@ -18,13 +18,13 @@ describe('getBranchesRequest', () => {
       expect(result).to.eql([
         {
           name: 'branch1',
-          treeHref: '/tree?commit=refs/heads/branch1',
-          logHref: '/log?ref=refs/heads/branch1'
+          treeHref: '/tree?commit=branch1',
+          logHref: '/log?ref=branch1'
         },
         {
           name: 'branch2',
-          treeHref: '/tree?commit=refs/heads/branch2',
-          logHref: '/log?ref=refs/heads/branch2'
+          treeHref: '/tree?commit=branch2',
+          logHref: '/log?ref=branch2'
         }
       ]);
     });
