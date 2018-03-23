@@ -37,7 +37,7 @@ describe('getLogRequest', () => {
           older: '/log?ref=some/revision&skip=5'
         },
         commits: [],
-        title: ref,
+        title: ref
       });
     });
   });

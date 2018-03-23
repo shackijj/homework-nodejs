@@ -1,4 +1,8 @@
-sudo: false
+dist: trusty
+sudo: required
+addons:
+  chrome: stable
+
 language: node_js
 
 node_js:
@@ -6,7 +10,12 @@ node_js:
   - 8
 
 script:
+  - npm install -g selenium-standalone
+  - selenium-standalone install
+  - selenium-standalone start > /dev/null 2>&1 &
+  - xvfb-run npm run test:integration
   - npm run lint
+  - npm run lint:style
   - npm run test
   - npm run build
 
