@@ -7,16 +7,11 @@ script:
 - npm run lint:style
 - npm run test
 - npm run build
-jobs:
-  include:
-    stage: Deploy
-    script:
-    - npm run build
-    deploy:
-      provider: heroku
-      app: morning-journey-37996
-      api_key:
-        secure: qsuwbRpTsSk3lnCBks4Dp2g/sboyNixuKQJpyukM6g0fpIlnMp3v9OOiJOZ4HNswHthJBKr3NZml6QEshnHwef0aAAMZRskDnk5UhSMkcjHiQqoFXh8U6sJO+dlGwrP8/AV/gs89JuWFuL/u+sAIyO80MY+z5W9Wud/dXUW6HeJzJVv1/wxQYHJ2FClFKQqgcIQy1TZj0rkWjos6yX+6JSN6+hlIb/3+/oxSRY4CrHuHdmDegoAncEy9cWrdpb2rV5kwKHwdOJSmTNJXzudyjuzFtZIimKRTLuzGDtJoJvwjegDAQMC9+FmPR/DTmCjqJ9jQCwBW6msiUSQ4ln0zPsKYw6j1zaN6S4cqSJeI2m5/XRwS1Fc6ly7p0yS67XvhSf+gw/Y0KcES7qrXyz2/e8tZK/0uTRA2QuWB6JDL8HdtDmZySWlnn6bMq3QE8vyrsMbbpQ82K4mpUsdkgnGGJ9Yq6xd0iOb/p16b+5sfs8k1Nvr74tV0FcZiYpc5OOvY/o2mwjaRU1kwyiY/QM/vmB4TKEgYAsP7LmeN0t4C3F5TvoqYi/vOcKqT+Tuf3gY+Z+pQn2bYxFS8fc4QFaZKT6S7b/7GrVAr/68V3AvvlS5bTbX0fxikOZ9Yijy59EItJCme5jdCYZgNxPGp+3G28CvhlfKqpj0SUfB+Q+41rtw=
-      skip_cleanup: true
-      on:
-        all_branches: true
+deploy:
+  provider: heroku
+  app: morning-journey-37996
+  api_key:
+    secure: qsuwbRpTsSk3lnCBks4Dp2g/sboyNixuKQJpyukM6g0fpIlnMp3v9OOiJOZ4HNswHthJBKr3NZml6QEshnHwef0aAAMZRskDnk5UhSMkcjHiQqoFXh8U6sJO+dlGwrP8/AV/gs89JuWFuL/u+sAIyO80MY+z5W9Wud/dXUW6HeJzJVv1/wxQYHJ2FClFKQqgcIQy1TZj0rkWjos6yX+6JSN6+hlIb/3+/oxSRY4CrHuHdmDegoAncEy9cWrdpb2rV5kwKHwdOJSmTNJXzudyjuzFtZIimKRTLuzGDtJoJvwjegDAQMC9+FmPR/DTmCjqJ9jQCwBW6msiUSQ4ln0zPsKYw6j1zaN6S4cqSJeI2m5/XRwS1Fc6ly7p0yS67XvhSf+gw/Y0KcES7qrXyz2/e8tZK/0uTRA2QuWB6JDL8HdtDmZySWlnn6bMq3QE8vyrsMbbpQ82K4mpUsdkgnGGJ9Yq6xd0iOb/p16b+5sfs8k1Nvr74tV0FcZiYpc5OOvY/o2mwjaRU1kwyiY/QM/vmB4TKEgYAsP7LmeN0t4C3F5TvoqYi/vOcKqT+Tuf3gY+Z+pQn2bYxFS8fc4QFaZKT6S7b/7GrVAr/68V3AvvlS5bTbX0fxikOZ9Yijy59EItJCme5jdCYZgNxPGp+3G28CvhlfKqpj0SUfB+Q+41rtw=
+  skip_cleanup: true
+  on:
+    all_branches: true
