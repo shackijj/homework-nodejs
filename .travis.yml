@@ -9,7 +9,7 @@ script:
 - npm run build
 jobs:
   include:
-    stage: preview
+    stage: deploy
     script:
     - npm run build
     deploy:
@@ -18,5 +18,3 @@ jobs:
       api_key:
         secure: JZ9wPBxtothWzM9jZx0r6wzD+Y7qbxqqQquaErn+WpoAzpuq75Ioq13AZw61c0KIMkSEgmPdLTbyeG/bBFDINSyzVHr3rxtMJggKfmdNJkTKL6n07ZSs7gp2BqtrmIYLdALvOVCqmh+1/GlwahElX3vvxt1IFNHNYfLlJzOv2OPVUevWrNc+9ZyPjM0I2QrRKyIyYcuq9BRzaX6xVMydz+VJx4V5JmVsVg8J3bQJwwAhn77Qho959empUaPAAHJzcCtjOXp34AHngSQhodjtniTtTagY+A5UBiT9vdxF+vk2p5ZOzyOpIlo4HWOSxaDNA0LKVE9hAOqnjuip5fAQ2RXTUJ5DMEce78gWqj2l4xOCtm/6QIrN/9g1Vwd8LJVlv/uwZobl9D6pNE7FBN180LA0wx7p8PzL6Rm14y1HhATgPbwIvXgMlsDqkZptgr8HXCw72/O/eoDI98JcwlHrWT6FmKhq8LHbagm9hIUKOR4oShb/bZaqVI37lGovJNW5I9I63HFQBSMAeT/qgQ/+PARM3fgqgolALsY3jA0LVgbXqMrFD5MGBK7oSX6l3JgWD1AKZQJ87TV6eBKQ0AP/zObFJcrM9aqSaICrWLP/G3zJVFQ4snG7cLXfvU9oSIafefjfeb+IdPZtFw6Qm/W6dEZ/ESFo6JSYnWN7dbOoswY=
       skip_cleanup: true
-      on:
-        all_branches: true
