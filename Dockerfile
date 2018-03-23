@@ -2,8 +2,6 @@ FROM node:carbon
 
 WORKDIR /usr/src/app
 
-RUN npm run build
-
 COPY . .
 
 RUN git clone https://github.com/shackijj/hermione-simple-environment
