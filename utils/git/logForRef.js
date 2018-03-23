@@ -8,9 +8,6 @@ const execShell = require('../execShell');
 function logForRef (repoPath, refPath) {
   const cmd = `
     cd ${repoPath};
-    echo GIT_DISCOVERY_ACROSS_FILESYSTEM
-    pwd
-    ls -la
     REV_HASH=$(git show-ref --hash ${refPath});
     git --no-pager log $REV_HASH --pretty='format:%s;%H;%ai'
   `;
