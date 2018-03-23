@@ -3,8 +3,8 @@
   "scripts": {
   },
   "env": {
-    "INHERIT_THIS_CONFIG_VAR": {
-      "GIT_DISCOVERY_ACROSS_FILESYSTEM": true
+    "GIT_DISCOVERY_ACROSS_FILESYSTEM": {
+      "value": "1"
     }
   },
   "formation": {
