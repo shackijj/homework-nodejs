@@ -1,15 +1,12 @@
 {
   "name": "homework-nodejs",
-  "scripts": {
-  },
-  "env": {
-  },
+  "scripts": {},
+  "env": {},
   "formation": {
+    "web": {
+      "quantity": 1
+    }
   },
-  "addons": [
-
-  ],
-  "buildpacks": [
-
-  ]
+  "addons": [],
+  "buildpacks": []
 }
