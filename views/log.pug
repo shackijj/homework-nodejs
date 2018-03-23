@@ -5,6 +5,11 @@ block append head
 
 block append content
   h2(class="content__header")=commit="Log for " + branch
+  div(class="pagination")
+    -if (pagination.newer !== '')
+      a(class="pagination__link", href=pagination.newer)="Newer"
+    -if (pagination.older !== '')
+      a(class="pagination__link", href=pagination.older)="Older"
   ul(class="commits-list")
     each commit in commits
       li(class="commits-list__item")

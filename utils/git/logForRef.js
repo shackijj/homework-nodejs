@@ -2,24 +2,34 @@ const execShell = require('../execShell');
 
 /**
  * @param {string} repoPath
- * @param {string} refPath
+ * @param {string} ref
+ * @param {nummber} count
+ * @param {number} skip
  * @return {Promise}
  */
-function logForRef (repoPath, refPath) {
-  const cmd = `
+function logForRef (repoPath, ref, count = 30, skip = 0) {
+  const getCommits = `
     cd ${repoPath};
-    REV_HASH=$(git show-ref --hash ${refPath});
-    git --no-pager log $REV_HASH --pretty='format:%s;%H;%ai'
+    REV_HASH=$(git show-ref --hash ${ref});
+    git --no-pager log $REV_HASH --pretty='format:%s;%H;%ai' -n ${count} --skip=${skip};
   `;
-  return execShell(cmd)
-    .then((stdout) => {
-      return stdout
+
+  const getCount = `
+    cd ${repoPath};
+    git rev-list --count ${ref};
+  `;
+  return Promise.all([execShell(getCommits), execShell(getCount)])
+    .then(([getCommitOutput, getCountOutput]) => {
+      const commits = getCommitOutput
         .trim()
         .split('\n')
         .map((line) => {
           const [subject, hash, date] = line.split(';');
           return { subject, hash, date };
         });
+
+      const total = parseInt(getCountOutput, 10);
+      return { commits, total };
     });
 };
 
