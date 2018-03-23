@@ -4,6 +4,7 @@ WORKDIR /usr/src/app
 
 COPY . .
 
+RUN git clone https://github.com/shackijj/hermione-simple-environment
 RUN npm install
 RUN npm run build
 
