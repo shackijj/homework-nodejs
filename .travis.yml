@@ -8,14 +8,30 @@ script:
 - npm run test
 - npm run build
 
+
+aliases:
+  deploy: &deploy
+    provider: heroku
+    api_key:
+      secure: F9Tz+ygosEilmvuR3DYRc1mUdNWPQKLeGb2gGBNYWkRc4i4w00TMcjYaHE3puA2amhgmAph3U0aJHaTK0kZQ+Tu5vuV6lQb3vj/RpfIi0lIo5a0ML3X8guKqcmXjWv853PQC9O34pfBJ8YV9VENvEye3DrKZfj+xMuUguYKflXA22+AGJzqqyQxPfoAYNnMHyWQ5JftKmjTYwwd/i7U3Ya4lJt4WMEif8K8Crfm+PYMxKNLY2lyv3xa+CYFvX2jkAbpRmx6b00NH+kmEdTd00DYjDSclCn29kZNydRPwiFNDc4iZrOYtxbVrDmGFCoGzLb3H8yJ9t5AMVxtIWRbzevUMKBz4S1P8DsOMDkzxwFWQ6x3Ml9iuzbx3+M0BGUmrm8jhn/hCWlCPg4Tp3y//fVbpYZDRBry9MVeBLrLE+M2gmSWUtCXivPkLOzIDSIjcaYUCFGtMfb0MwmgCB6VJnWcAIXynbmfmbm/DoZeVCw1xsYCyEFUkrMmAXCJWY/UtxFZ4Pf9SQnWP5nwMAVfv42cj2PPYAsQzM1Qb+wmqhpcNe30QFrQRLYcZHTNVgMMA+kyQfzpVH829YZyv5WJlPnqaeZxXQoKuxOItMH1nHhLXBtgKjVCfg/PBK72Equh0RE5pcNirzI1DNY08QQPelKowHMd+K8IXzIT/NvV2cHo=
+    skip_cleanup: true
+
 jobs:
   include:
-    stage: Deploy
+  - stage: Deploy (stage)
+    if: tag IS blank
     script:
       - npm run build
     deploy:
-      provider: heroku
+      <<: *deploy
       app: homework-nodejs-infra
-      api_key:
-        secure: F9Tz+ygosEilmvuR3DYRc1mUdNWPQKLeGb2gGBNYWkRc4i4w00TMcjYaHE3puA2amhgmAph3U0aJHaTK0kZQ+Tu5vuV6lQb3vj/RpfIi0lIo5a0ML3X8guKqcmXjWv853PQC9O34pfBJ8YV9VENvEye3DrKZfj+xMuUguYKflXA22+AGJzqqyQxPfoAYNnMHyWQ5JftKmjTYwwd/i7U3Ya4lJt4WMEif8K8Crfm+PYMxKNLY2lyv3xa+CYFvX2jkAbpRmx6b00NH+kmEdTd00DYjDSclCn29kZNydRPwiFNDc4iZrOYtxbVrDmGFCoGzLb3H8yJ9t5AMVxtIWRbzevUMKBz4S1P8DsOMDkzxwFWQ6x3Ml9iuzbx3+M0BGUmrm8jhn/hCWlCPg4Tp3y//fVbpYZDRBry9MVeBLrLE+M2gmSWUtCXivPkLOzIDSIjcaYUCFGtMfb0MwmgCB6VJnWcAIXynbmfmbm/DoZeVCw1xsYCyEFUkrMmAXCJWY/UtxFZ4Pf9SQnWP5nwMAVfv42cj2PPYAsQzM1Qb+wmqhpcNe30QFrQRLYcZHTNVgMMA+kyQfzpVH829YZyv5WJlPnqaeZxXQoKuxOItMH1nHhLXBtgKjVCfg/PBK72Equh0RE5pcNirzI1DNY08QQPelKowHMd+K8IXzIT/NvV2cHo=
-      skip_cleanup: true
+
+  - stage: Deploy (prod)
+    if: tag IS present
+    script:
+      - npm run build
+    deploy:
+      <<: *deploy
+      app: homework-nodejs-infra-prod
+      on:
+        tags: true
