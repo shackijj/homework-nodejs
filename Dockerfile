@@ -1,6 +1,9 @@
 FROM node:carbon
 
-WORKDIR /usr/src/app
+RUN useradd -ms /bin/bash nodeapp
+
+USER nodeapp
+WORKDIR /home/nodeapp
 
 COPY . .
 
