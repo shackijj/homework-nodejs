@@ -9,9 +9,7 @@ const execShell = require('../execShell');
  */
 function logForRef (repoPath, ref, count = 30, skip = 0) {
   const getCommits = `
-    cd ${repoPath};
-    REV_HASH=$(git show-ref --hash ${ref});
-    git --no-pager log $REV_HASH --pretty='format:%s;%H;%ai' -n ${count} --skip=${skip};
+    git --git-dir=${repoPath}/.git --no-pager log ${ref} --pretty='format:%s;%H;%ai' -n ${count} --skip=${skip};
   `;
 
   const getCount = `

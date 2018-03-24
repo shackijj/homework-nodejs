@@ -7,8 +7,7 @@ const execShell = require('../execShell');
  */
 function forEachRef (repoPath, refsPattern) {
   const cmd = `
-    cd ${repoPath};
-    git for-each-ref --format='%(refname:short)' ${refsPattern};
+    git --git-dir=${repoPath}/.git for-each-ref --format='%(refname:short)' ${refsPattern};
   `;
   return execShell(cmd)
     .then((stdout) => stdout.trim().split('\n'));

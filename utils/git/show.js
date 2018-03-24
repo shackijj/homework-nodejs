@@ -8,8 +8,7 @@ const execShell = require('../execShell');
  */
 function getBlob (repoPath, commit, path) {
   const cmd = `
-    cd ${repoPath};
-    git show ${commit}:${path};
+    git --git-dir=${repoPath}/.git show ${commit}:${path};
   `;
   return execShell(cmd);
 };

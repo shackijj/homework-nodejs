@@ -7,8 +7,7 @@ const execShell = require('../execShell');
  */
 function lsTree (repoPath, treeishId) {
   const cmd = `
-    cd ${repoPath};
-    git ls-tree ${treeishId};
+    git --git-dir=${repoPath}/.git ls-tree ${treeishId};
   `;
   return execShell(cmd)
     .then(stdout => stdout
