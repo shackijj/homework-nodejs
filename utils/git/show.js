@@ -1,4 +1,4 @@
-const execShell = require('../execShell');
+const runCommand = require('../runCommand');
 
 /**
  * @param {string} repoPath
@@ -7,11 +7,7 @@ const execShell = require('../execShell');
  * @return {Promise}
  */
 function getBlob (repoPath, commit, path) {
-  const cmd = `
-    cd ${repoPath};
-    git show ${commit}:${path};
-  `;
-  return execShell(cmd);
+  return runCommand('git', [`--git-dir=${repoPath}/.git`, `show`, `${commit}:${path}`]);
 };
 
 module.exports = getBlob;
