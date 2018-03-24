@@ -1,4 +1,4 @@
-const execShell = require('../execShell');
+const runCommand = require('../runCommand');
 /**
  * @see https://git-scm.com/docs/git-ls-tree
  * @param {string} repoPath
@@ -6,10 +6,7 @@ const execShell = require('../execShell');
  * @return {Promise}
  */
 function lsTree (repoPath, treeishId) {
-  const cmd = `
-    git --git-dir=${repoPath}/.git ls-tree ${treeishId};
-  `;
-  return execShell(cmd)
+  return runCommand('git', [`--git-dir=${repoPath}/.git`, 'ls-tree', treeishId])
     .then(stdout => stdout
       .trim()
       .split('\n')

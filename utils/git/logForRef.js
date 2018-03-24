@@ -1,22 +1,17 @@
-const execShell = require('../execShell');
+const runCommand = require('../runCommand');
 
 /**
  * @param {string} repoPath
  * @param {string} ref
- * @param {nummber} count
+ * @param {number} count
  * @param {number} skip
  * @return {Promise}
  */
 function logForRef (repoPath, ref, count = 30, skip = 0) {
-  const getCommits = `
-    git --git-dir=${repoPath}/.git --no-pager log ${ref} --pretty='format:%s;%H;%ai' -n ${count} --skip=${skip};
-  `;
+  const getCommits = runCommand('git', [`--git-dir=${repoPath}/.git`, '--no-pager', 'log', ref, `--pretty=format:%s;%H;%ai`, '-n', count, '--skip', skip]);
+  const getCount = runCommand('git', [`--git-dir=${repoPath}/.git`, 'rev-list', ref]);
 
-  const getCount = `
-    cd ${repoPath};
-    git rev-list --count ${ref};
-  `;
-  return Promise.all([execShell(getCommits), execShell(getCount)])
+  return Promise.all([getCommits, getCount])
     .then(([getCommitOutput, getCountOutput]) => {
       const commits = getCommitOutput
         .trim()

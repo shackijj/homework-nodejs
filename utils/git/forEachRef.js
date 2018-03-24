@@ -1,4 +1,4 @@
-const execShell = require('../execShell');
+const runCommand = require('../runCommand');
 
 /**
  * @param {string} repoPath
@@ -6,10 +6,7 @@ const execShell = require('../execShell');
  * @return {Promise}
  */
 function forEachRef (repoPath, refsPattern) {
-  const cmd = `
-    git --git-dir=${repoPath}/.git for-each-ref --format='%(refname:short)' ${refsPattern};
-  `;
-  return execShell(cmd)
+  return runCommand('git', [`--git-dir=${repoPath}/.git`, `for-each-ref`, `--format=%(refname:short)`, refsPattern])
     .then((stdout) => stdout.trim().split('\n'));
 };
 
