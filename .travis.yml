@@ -1,7 +1,10 @@
-dist: trusty
-sudo: required
 addons:
-  chrome: stable
+  sauce_connect:
+    username: "kshatskiy"
+    access_key:
+      secure: "bSVUqjCssX8bZwqYjDl4dFI5kyaaWpYSHyhjE4ofb5HvbOkunY7jajofhc5fHKT1S8jxpa1jpSpHfpSdEcLZHJ7pFyiqUCY/mPGh3WQ0Ohk0voMhBmQVBLy+eyVLlVtUTmcpkPEshT6NgUecTBndWZnrjtOxgyf1m6sBwbtdkp5CSlvu5H1IUQj3X6Oi9FfrxMjIQzxSkc0o1AYhUTtPb1OKk1O9RuHgG8lMwwTH6vyul2HlpIR8EP1ZqxY9WOhv2tDGcj076IqmKqJ2V/RCJehDVsRF6WjvISXmlcMLuusL/BhLOvT/EAMa3q7KDUvZKnJOGRxD1e9sMi28c7it3MhsMSFCdviFDGfeHYL92VeOVSk5lqaZNX29bpRp8f8eKKQpKxV850+MhQMPkhU82EtqmrUC6OczEntvnTZv9fqYSMxC6xjQA9shZy57b1iZfD840OZDc9X24K210ZskZyXLLeI5a1ErDS6WHs3DdZxmgiMFCHH4roVLNe1atrIMRNE8wV9Vh7gJ6pej5R+Qp5zVzRLzE0jGu8KfB8dlWv+5EKjNWbT+zFNq6x/OUoa3jCqMqKpAChPo+iWnW3mheh98JeKA+jKM7IfndOPe1cBPiFzMz6BnlPfLCT4I67Jdtgp1XhS3mM3GdxPBkFGA0lAByq9et+F2VT/xt+obLDw="
+
+sudo: false
 
 language: node_js
 
@@ -10,6 +13,7 @@ node_js:
   - 8
 
 script:
+  - npm run test:integration
   - npm run lint
   - npm run lint:style
   - npm run test
