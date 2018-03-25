@@ -5,6 +5,8 @@ const { expect } = require('chai');
 
 const server = createServer(config);
 
+const {TRAVIS_JOB_NUMBER, SAUCE_USERNAME, SAUCE_ACCESS_KEY, CI} = process.env;
+
 module.exports = {
   sets: {
     desktop: {
@@ -15,13 +17,13 @@ module.exports = {
     chrome: {
       desiredCapabilities: {
           browserName: 'chrome',
-          'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER,
+          'tunnel-identifier': TRAVIS_JOB_NUMBER,
       }
     },
     firefox: {
       desiredCapabilities: {
           browserName: 'firefox',
-          'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER
+          'tunnel-identifier': TRAVIS_JOB_NUMBER
       }
     }
   },
@@ -44,5 +46,5 @@ module.exports = {
     }
   },
   baseUrl: `http://${config.host}:${config.port}`,
-  gridUrl: process.env.CI ? `http://${process.env.SAUCE_USERNAME}:${process.env.SAUCE_ACCESS_KEY}@localhost:4445/wd/hub` : undefined
+  gridUrl: CI ? `http://${SAUCE_USERNAME}:${SAUCE_ACCESS_KEY}@localhost:4445/wd/hub` : undefined
 };
