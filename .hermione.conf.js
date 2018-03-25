@@ -8,15 +8,15 @@ const server = createServer(config);
 module.exports = {
   sets: {
     desktop: {
-        files: 'integration_tests/**/*.hermione.js',
+        files: 'integration_tests/user_opens_root_page.hermione.js',
     }
   },
   browsers: {
-    chrome: {
+/*     chrome: {
       desiredCapabilities: {
           browserName: 'chrome'
       }
-    },
+    }, */
     firefox: {
       desiredCapabilities: {
           browserName: 'firefox'
