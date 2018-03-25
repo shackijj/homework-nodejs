@@ -1,18 +1,15 @@
-dist: trusty
-sudo: required
+addons:
+  sauce_connect:
+    username: "kshatskiy"
+    access_key: "9b13132b-ea18-4aa6-aae0-f14ae37cb780"
+
+sudo: false
 
 language: node_js
 
 node_js:
   - 'node'
   - 8
-
-before_install:
-  - /sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1280x1024x16
-  - npm i -g selenium-standalone
-  - "selenium-standalone install"
-  - selenium-standalone start > /dev/null 2>&1 &
-  - sleep 3
 
 script:
   - npm run test:integration

@@ -19,7 +19,8 @@ module.exports = {
     }, */
     firefox: {
       desiredCapabilities: {
-          browserName: 'firefox'
+          browserName: 'firefox',
+          'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER
       }
     }
   },
@@ -41,5 +42,6 @@ module.exports = {
       stopServer: () => server.stop(),
     }
   },
-  baseUrl: `http://${config.host}:${config.port}`
+  baseUrl: `http://${config.host}:${config.port}`,
+  gridUrl: `http://${process.env.SAUCE_USERNAME}:${process.env.SAUCE_USERNAME}@localhost:4445/wd/hub`
 };
