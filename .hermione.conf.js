@@ -43,5 +43,5 @@ module.exports = {
     }
   },
   baseUrl: `http://${config.host}:${config.port}`,
-  gridUrl: `http://${process.env.SAUCE_USERNAME}:${process.env.SAUCE_USERNAME}@localhost:4445/wd/hub`
+  gridUrl: `http://${process.env.SAUCE_USERNAME}:${process.env.SAUCE_ACCESS_KEY}@localhost:4445/wd/hub`
 };
