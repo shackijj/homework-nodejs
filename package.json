@@ -1,7 +1,7 @@
 {
   "name": "homework-nodejs",
   "version": "1.0.1",
-  "description": "SHRI 2018 homework-nodejs",
+  "description": "SHRI-2018 homework-nodejs",
   "main": "index.js",
   "scripts": {
     "coverage": "nyc report --reporter=text-lcov | coveralls",
