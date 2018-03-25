@@ -8,15 +8,16 @@ const server = createServer(config);
 module.exports = {
   sets: {
     desktop: {
-        files: 'integration_tests/user_opens_root_page.hermione.js',
+        files: 'integration_tests/**/*.hermione.js',
     }
   },
   browsers: {
-/*     chrome: {
+    chrome: {
       desiredCapabilities: {
-          browserName: 'chrome'
+          browserName: 'chrome',
+          'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER,
       }
-    }, */
+    },
     firefox: {
       desiredCapabilities: {
           browserName: 'firefox',
@@ -43,5 +44,5 @@ module.exports = {
     }
   },
   baseUrl: `http://${config.host}:${config.port}`,
-  gridUrl: `http://${process.env.SAUCE_USERNAME}:${process.env.SAUCE_ACCESS_KEY}@localhost:4445/wd/hub`
+  gridUrl: process.env.CI ? `http://${process.env.SAUCE_USERNAME}:${process.env.SAUCE_ACCESS_KEY}@localhost:4445/wd/hub` : undefined
 };
