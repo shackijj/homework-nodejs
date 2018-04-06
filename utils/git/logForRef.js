@@ -9,7 +9,7 @@ const runCommand = require('../runCommand');
  */
 function logForRef (repoPath, ref, count = 30, skip = 0) {
   const getCommits = runCommand('git', [`--git-dir=${repoPath}/.git`, '--no-pager', 'log', ref, `--pretty=format:%s;%H;%ai`, '-n', count, '--skip', skip]);
-  const getCount = runCommand('git', [`--git-dir=${repoPath}/.git`, 'rev-list', ref]);
+  const getCount = runCommand('git', [`--git-dir=${repoPath}/.git`, 'rev-list', ref, '--count']);
 
   return Promise.all([getCommits, getCount])
     .then(([getCommitOutput, getCountOutput]) => {
@@ -21,6 +21,7 @@ function logForRef (repoPath, ref, count = 30, skip = 0) {
           return { subject, hash, date };
         });
 
+      console.log(getCountOutput);
       const total = parseInt(getCountOutput, 10);
       return { commits, total };
     });
